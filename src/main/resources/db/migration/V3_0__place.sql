@@ -8,6 +8,8 @@ CREATE TABLE T_PLACE(
     timezone_id    VARCHAR(100) NOT NULL,
     longitude      DECIMAL(10, 4),
     latitude       DECIMAL(10, 4),
+    created        DATETIME DEFAULT NOW(),
+    updated        DATETIME NOT NULL DEFAULT now() ON UPDATE now(),
 
     PRIMARY KEY (id)
 );
