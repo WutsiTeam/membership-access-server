@@ -9,7 +9,7 @@ public data class Place(
     public val name: String = "",
     public val country: String = "",
     public val type: String = "",
-    public val longitude: Double = 0.0,
-    public val latitude: Double = 0.0,
-    public val timezoneId: String = ""
+    public val longitude: Double? = null,
+    public val latitude: Double? = null,
+    public val timezoneId: String? = null
 )
