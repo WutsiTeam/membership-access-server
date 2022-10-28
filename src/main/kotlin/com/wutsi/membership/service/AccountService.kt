@@ -4,6 +4,7 @@ import com.wutsi.membership.dao.AccountRepository
 import com.wutsi.membership.dto.Account
 import com.wutsi.membership.dto.AccountSummary
 import com.wutsi.membership.dto.Category
+import com.wutsi.membership.dto.CategorySummary
 import com.wutsi.membership.dto.CreateAccountRequest
 import com.wutsi.membership.dto.EnableBusinessRequest
 import com.wutsi.membership.dto.SearchAccountRequest
@@ -199,8 +200,8 @@ class AccountService(
         superUser = account.superUser,
         created = account.created.toInstant().atOffset(ZoneOffset.UTC),
         updated = account.updated.toInstant().atOffset(ZoneOffset.UTC),
-        category = account.category?.let { categoryService.toCategory(it, language) } ?: Category(),
-        city = placeService.toPlace(account.city, language)
+        category = account.category?.let { categoryService.toCategorySummary(it, language) } ?: CategorySummary(),
+        city = placeService.toPlaceSummary(account.city, language)
     )
 
     fun search(request: SearchAccountRequest): List<AccountEntity> {

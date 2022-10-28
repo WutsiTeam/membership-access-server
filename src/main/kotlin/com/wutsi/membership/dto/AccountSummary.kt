@@ -19,6 +19,6 @@ public data class AccountSummary(
     public val updated: OffsetDateTime = OffsetDateTime.now(),
     public val superUser: Boolean = false,
     public val business: Boolean = false,
-    public val city: Place = Place(),
-    public val category: Category = Category()
+    public val city: PlaceSummary = PlaceSummary(),
+    public val category: CategorySummary = CategorySummary()
 )

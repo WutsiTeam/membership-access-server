@@ -1,14 +1,16 @@
 package com.wutsi.membership.error
 
 enum class ErrorURN(val urn: String) {
-    ACCOUNT_NOT_FOUND("urn:wutsi:error:membership:account-not-found"),
-    ACCOUNT_SUSPENDED("urn:wutsi:error:membership:account-suspended"),
+    ACCOUNT_NOT_FOUND("urn:wutsi:error:membership-access:account-not-found"),
+    ACCOUNT_SUSPENDED("urn:wutsi:error:membership-access:account-suspended"),
 
-    ATTRIBUTE_NOT_VALID("urn:wutsi:error:account:attribute-not-valid"),
+    ATTRIBUTE_NOT_VALID("urn:wutsi:error:membership-access:attribute-not-valid"),
 
-    CATEGORY_NOT_FOUND("urn:wutsi:error:membership:category-not-found"),
+    CATEGORY_NOT_FOUND("urn:wutsi:error:membership-access:category-not-found"),
 
-    PHONE_NUMBER_ALREADY_ASSIGNED("urn:wutsi:error:membership:phone-number-already-assigned"),
+    DEVICE_NOT_FOUND("urn:wutsi:error:membership-access:device-not-found"),
 
-    PLACE_NOT_FOUND("urn:wutsi:error:membership:place-not-found")
+    PHONE_NUMBER_ALREADY_ASSIGNED("urn:wutsi:error:membership-access:phone-number-already-assigned"),
+
+    PLACE_NOT_FOUND("urn:wutsi:error:membership-access:place-not-found")
 }
