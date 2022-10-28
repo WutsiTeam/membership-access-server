@@ -1,5 +1,8 @@
 package com.wutsi.membership.dto
 
+import kotlin.Long
+import kotlin.String
+
 public data class PlaceSummary(
     public val id: Long = 0,
     public val name: String = "",

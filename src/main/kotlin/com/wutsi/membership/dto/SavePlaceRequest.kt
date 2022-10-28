@@ -1,6 +1,7 @@
 package com.wutsi.membership.dto
 
 import javax.validation.constraints.NotBlank
+import javax.validation.constraints.Size
 import kotlin.Double
 import kotlin.Long
 import kotlin.String
@@ -12,10 +13,11 @@ public data class SavePlaceRequest(
     @get:NotBlank
     public val nameFrench: String = "",
     @get:NotBlank
+    @get:Size(max = 2)
     public val country: String = "",
     @get:NotBlank
     public val type: String = "",
-    public val longitude: Double = 0.0,
-    public val latitude: Double = 0.0,
-    public val timezoneId: String = ""
+    public val longitude: Double? = null,
+    public val latitude: Double? = null,
+    public val timezoneId: String? = null
 )

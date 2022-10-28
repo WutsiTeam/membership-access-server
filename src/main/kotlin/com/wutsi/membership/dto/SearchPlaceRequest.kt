@@ -1,5 +1,8 @@
 package com.wutsi.membership.dto
 
+import kotlin.Int
+import kotlin.String
+
 public data class SearchPlaceRequest(
     public val keyword: String? = null,
     public val type: String? = null,
