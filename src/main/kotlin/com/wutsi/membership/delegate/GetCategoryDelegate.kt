@@ -1,6 +1,5 @@
 package com.wutsi.membership.`delegate`
 
-import com.wutsi.membership.dto.Category
 import com.wutsi.membership.dto.GetCategoryResponse
 import com.wutsi.membership.service.CategoryService
 import org.springframework.stereotype.Service
@@ -15,10 +14,7 @@ class GetCategoryDelegate(
         val category = service.findById(id)
         val language = request.getHeader("Accept-Language")
         return GetCategoryResponse(
-            category = Category(
-                id = category.id ?: -1,
-                title = service.getTitle(category, language)
-            )
+            category = service.toCategory(category, language)
         )
     }
 }

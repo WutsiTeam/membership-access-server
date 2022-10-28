@@ -1,6 +1,8 @@
 package com.wutsi.membership.service
 
 import com.wutsi.membership.dao.PlaceRepository
+import com.wutsi.membership.dto.Place
+import com.wutsi.membership.dto.PlaceSummary
 import com.wutsi.membership.dto.SavePlaceRequest
 import com.wutsi.membership.dto.SearchPlaceRequest
 import com.wutsi.membership.entity.PlaceEntity
@@ -74,6 +76,25 @@ class PlaceService(
             .setMaxResults(request.limit)
             .resultList as List<PlaceEntity>
     }
+
+    fun toPlace(place: PlaceEntity, language: String?) = Place(
+        id = place.id,
+        name = getName(place, language),
+        longName = getLongName(place, language),
+        latitude = place.latitude,
+        longitude = place.longitude,
+        country = place.country,
+        type = place.type.name,
+        timezoneId = place.timezoneId
+    )
+
+    fun toPlaceSummary(place: PlaceEntity, language: String?) = PlaceSummary(
+        id = place.id,
+        name = getName(place, language),
+        longName = getLongName(place, language),
+        country = place.country,
+        type = place.type.name
+    )
 
     private fun sql(request: SearchPlaceRequest): String {
         val select = select()

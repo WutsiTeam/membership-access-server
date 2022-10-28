@@ -1,12 +1,14 @@
 package com.wutsi.membership.`delegate`
 
 import com.wutsi.membership.dto.EnableBusinessRequest
+import com.wutsi.membership.service.AccountService
 import org.springframework.stereotype.Service
-import kotlin.Long
+import javax.transaction.Transactional
 
 @Service
-public class EnableBusinessDelegate() {
+public class EnableBusinessDelegate(private val service: AccountService) {
+    @Transactional
     public fun invoke(id: Long, request: EnableBusinessRequest) {
-        TODO()
+        service.enableBusiness(id, request)
     }
 }

@@ -1,7 +1,10 @@
 package com.wutsi.membership.service
 
 import com.wutsi.membership.dao.AccountRepository
+import com.wutsi.membership.dto.Account
+import com.wutsi.membership.dto.Category
 import com.wutsi.membership.dto.CreateAccountRequest
+import com.wutsi.membership.dto.EnableBusinessRequest
 import com.wutsi.membership.dto.UpdateAccountAttributeRequest
 import com.wutsi.membership.entity.AccountEntity
 import com.wutsi.membership.entity.AccountStatus
@@ -14,6 +17,7 @@ import com.wutsi.platform.core.error.exception.BadRequestException
 import com.wutsi.platform.core.error.exception.ConflictException
 import com.wutsi.platform.core.error.exception.NotFoundException
 import org.springframework.stereotype.Service
+import java.time.ZoneOffset
 
 @Service
 class AccountService(
@@ -53,7 +57,7 @@ class AccountService(
 
         when (request.name.lowercase()) {
             "display-name" -> account.displayName = toString(request.value)!!
-            "picture-url" -> account.pictureUrl = request.value
+            "picture-url" -> account.pictureUrl = toString(request.value)
             "language" -> account.language = request.value ?: DEFAULT_LANGUAGE
             "country" -> account.country = request.value ?: DEFAULT_COUNTRY
             "biography" -> account.biography = toString(request.value)
@@ -80,6 +84,33 @@ class AccountService(
             )
         }
         dao.save(account)
+        return account
+    }
+
+    fun enableBusiness(id: Long, request: EnableBusinessRequest): AccountEntity {
+        val account = findById(id)
+
+        account.category = request.categoryId?.let { categoryService.findById(it) }
+        account.city = placeService.findById(request.cityId)
+        account.business = true
+        account.displayName = request.displayName
+        account.whatsapp = request.whatsapp
+        account.country = request.country
+        account.street = request.street
+        account.biography = request.biography
+        dao.save(account)
+
+        return account
+    }
+
+    fun disableBusiness(id: Long): AccountEntity {
+        val account = findById(id)
+
+        if (account.business) {
+            account.business = false
+            dao.save(account)
+        }
+
         return account
     }
 
@@ -113,6 +144,33 @@ class AccountService(
         return account
     }
 
+    fun toAccount(account: AccountEntity, language: String?) = Account(
+        id = account.id ?: -1,
+        displayName = account.displayName,
+        timezoneId = account.timezoneId,
+        pictureUrl = account.pictureUrl,
+        country = account.country,
+        language = account.language,
+        status = account.status.name,
+        email = account.email,
+        whatsapp = account.whatsapp,
+        biography = account.biography,
+        street = account.street,
+        instagramId = account.instagramId,
+        youtubeId = account.youtubeId,
+        facebookId = account.facebookId,
+        twitterId = account.twitterId,
+        website = account.website,
+        business = account.business,
+        superUser = account.superUser,
+        suspended = account.suspended?.toInstant()?.atOffset(ZoneOffset.UTC),
+        created = account.created.toInstant().atOffset(ZoneOffset.UTC),
+        updated = account.updated.toInstant().atOffset(ZoneOffset.UTC),
+        phone = phoneService.toPhone(account.phone),
+        category = account.category?.let { categoryService.toCategory(it, language) } ?: Category(),
+        city = placeService.toPlace(account.city, language)
+    )
+
     private fun ensureNotAssigned(phone: PhoneEntity) {
         val account = dao.findByPhoneAndStatus(phone, AccountStatus.ACTIVE)
         if (account.isPresent) {
@@ -128,9 +186,6 @@ class AccountService(
             )
         }
     }
-
-    private fun toBoolean(value: String?): Boolean =
-        value?.lowercase() == "true"
 
     private fun toString(value: String?): String? =
         if (value.isNullOrEmpty()) {

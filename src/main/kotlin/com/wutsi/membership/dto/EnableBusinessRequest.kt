@@ -3,8 +3,6 @@ package com.wutsi.membership.dto
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.NotNull
 import javax.validation.constraints.Size
-import kotlin.Long
-import kotlin.String
 
 public data class EnableBusinessRequest(
     @get:NotBlank
@@ -14,12 +12,8 @@ public data class EnableBusinessRequest(
     public val categoryId: Long? = null,
     @get:NotBlank
     public val country: String = "",
-    @get:NotNull
-    public val cityId: Long? = null,
+    public val cityId: Long = -1,
     public val street: String? = null,
     public val biography: String? = null,
-    public val whatsapp: String? = null,
-    public val facebookId: String? = null,
-    public val instagramId: String? = null,
-    public val twitterId: String? = null
+    public val whatsapp: String? = null
 )

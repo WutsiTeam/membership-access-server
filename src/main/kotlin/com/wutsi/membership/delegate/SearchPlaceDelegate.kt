@@ -1,6 +1,5 @@
 package com.wutsi.membership.`delegate`
 
-import com.wutsi.membership.dto.PlaceSummary
 import com.wutsi.membership.dto.SearchPlaceRequest
 import com.wutsi.membership.dto.SearchPlaceResponse
 import com.wutsi.membership.service.PlaceService
@@ -29,13 +28,7 @@ public class SearchPlaceDelegate(
 
         return SearchPlaceResponse(
             places = places.map {
-                PlaceSummary(
-                    id = it.id,
-                    name = service.getName(it, language),
-                    longName = service.getLongName(it, language),
-                    country = it.country,
-                    type = it.type.name
-                )
+                service.toPlaceSummary(it, language)
             }
         )
     }

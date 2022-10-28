@@ -2,8 +2,10 @@ package com.wutsi.membership.service
 
 import com.google.i18n.phonenumbers.PhoneNumberUtil
 import com.wutsi.membership.dao.PhoneRepository
+import com.wutsi.membership.dto.Phone
 import com.wutsi.membership.entity.PhoneEntity
 import org.springframework.stereotype.Service
+import java.time.ZoneOffset
 
 @Service
 class PhoneService(private val dao: PhoneRepository) {
@@ -21,4 +23,11 @@ class PhoneService(private val dao: PhoneRepository) {
             )
         }
     }
+
+    fun toPhone(phone: PhoneEntity) = Phone(
+        id = phone.id ?: -1,
+        number = phone.number,
+        country = phone.country,
+        created = phone.created.toInstant().atOffset(ZoneOffset.UTC)
+    )
 }

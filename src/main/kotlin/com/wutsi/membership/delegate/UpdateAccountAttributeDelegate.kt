@@ -12,6 +12,7 @@ class UpdateAccountAttributeDelegate(
 ) {
     fun invoke(id: Long, request: UpdateAccountAttributeRequest) {
         logger.add("request_value", request.value)
+        logger.add("request_name", request.name)
 
         service.update(id, request)
     }

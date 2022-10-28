@@ -1,10 +1,7 @@
 package com.wutsi.membership.dto
 
-import org.springframework.format.`annotation`.DateTimeFormat
+import org.springframework.format.annotation.DateTimeFormat
 import java.time.OffsetDateTime
-import kotlin.Boolean
-import kotlin.Long
-import kotlin.String
 
 public data class Account(
     public val id: Long = 0,
@@ -14,7 +11,7 @@ public data class Account(
     public val category: Category = Category(),
     public val pictureUrl: String? = null,
     public val status: String = "",
-    public val displayName: String? = null,
+    public val displayName: String = "",
     public val language: String = "",
     public val country: String = "",
     @get:DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
@@ -23,8 +20,8 @@ public data class Account(
     public val updated: OffsetDateTime = OffsetDateTime.now(),
     @get:DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
     public val suspended: OffsetDateTime? = null,
-    public val isSuperUser: Boolean = false,
-    public val isBusiness: Boolean = false,
+    public val superUser: Boolean = false,
+    public val business: Boolean = false,
     public val biography: String? = null,
     public val website: String? = null,
     public val whatsapp: String? = null,

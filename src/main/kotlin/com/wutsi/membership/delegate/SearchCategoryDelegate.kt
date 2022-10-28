@@ -1,6 +1,5 @@
 package com.wutsi.membership.`delegate`
 
-import com.wutsi.membership.dto.CategorySummary
 import com.wutsi.membership.dto.SearchCategoryRequest
 import com.wutsi.membership.dto.SearchCategoryResponse
 import com.wutsi.membership.service.CategoryService
@@ -29,12 +28,8 @@ class SearchCategoryDelegate(
             SearchCategoryResponse()
         } else {
             SearchCategoryResponse(
-                categories = categories.map {
-                    CategorySummary(
-                        id = it.id ?: -1,
-                        title = service.getTitle(it, language)
-                    )
-                }.sortedBy { it.title }
+                categories = categories.map { service.toCategorySummary(it, language) }
+                    .sortedBy { it.title }
                     .subList(
                         request.offset,
                         min(request.offset + request.limit, categories.size)

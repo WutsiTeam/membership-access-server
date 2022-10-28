@@ -11,9 +11,9 @@ INSERT INTO T_PHONE(id, number, country)
         (199, '+237221234199', 'CM')
 ;
 
-INSERT INTO T_ACCOUNT(id, phone_fk, city_fk, category_fk, status, display_name, picture_url)
+INSERT INTO T_ACCOUNT(id, phone_fk, city_fk, category_fk, status, display_name, picture_url, country, language)
     VALUES
-        (100, 100, 100, 1000, 1, 'Ray Sponsible', 'https://me.com/12343/picture.png'),
-        (101, 101, 100, null, 1, 'Thomas Nkono', 'https://me.com/101/picture.png'),
-        (199, 199, 100, null, 2, 'Suspended', null)
+        (100, 100, 100, 1000, 1, 'Ray Sponsible', 'https://me.com/12343/picture.png', 'CM', 'fr'),
+        (101, 101, 100, null, 1, 'Thomas Nkono', 'https://me.com/101/picture.png', 'CM', 'fr'),
+        (199, 199, 100, null, 2, 'Suspended', null, 'CM', 'fr')
     ;

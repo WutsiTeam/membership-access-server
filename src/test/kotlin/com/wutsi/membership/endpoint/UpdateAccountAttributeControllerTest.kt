@@ -54,7 +54,7 @@ class UpdateAccountAttributeControllerTest {
     fun `empty picture-url`() {
         val value = ""
         val account = testAttibute("picture-url", value)
-        assertNull(account.language)
+        assertNull(account.pictureUrl)
     }
 
     @Test

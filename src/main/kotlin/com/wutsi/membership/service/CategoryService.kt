@@ -1,6 +1,8 @@
 package com.wutsi.membership.service
 
 import com.wutsi.membership.dao.CategoryRepository
+import com.wutsi.membership.dto.Category
+import com.wutsi.membership.dto.CategorySummary
 import com.wutsi.membership.entity.CategoryEntity
 import com.wutsi.membership.error.ErrorURN
 import com.wutsi.platform.core.error.Error
@@ -34,4 +36,14 @@ class CategoryService(private val dao: CategoryRepository) {
             "fr" -> category.titleFrench
             else -> category.title
         }
+
+    fun toCategory(category: CategoryEntity, language: String?) = Category(
+        id = category.id,
+        title = getTitle(category, language)
+    )
+
+    fun toCategorySummary(category: CategoryEntity, language: String?) = CategorySummary(
+        id = category.id,
+        title = getTitle(category, language)
+    )
 }
