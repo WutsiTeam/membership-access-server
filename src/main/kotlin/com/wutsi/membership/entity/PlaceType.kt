@@ -2,7 +2,8 @@ package com.wutsi.membership.entity
 
 enum class PlaceType {
     UNKNOWN,
-    COUNTRY,
+    CITY,
     PROVINCE,
-    STATE
+    STATE,
+    COUNTRY
 }

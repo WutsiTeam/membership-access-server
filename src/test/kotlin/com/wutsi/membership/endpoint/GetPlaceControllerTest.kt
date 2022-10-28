@@ -4,36 +4,20 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.wutsi.membership.dto.GetPlaceResponse
 import com.wutsi.membership.error.ErrorURN
 import com.wutsi.platform.core.error.ErrorResponse
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.server.LocalServerPort
-import org.springframework.http.HttpRequest
 import org.springframework.http.HttpStatus
-import org.springframework.http.client.ClientHttpRequestExecution
-import org.springframework.http.client.ClientHttpRequestInterceptor
-import org.springframework.http.client.ClientHttpResponse
 import org.springframework.test.context.jdbc.Sql
 import org.springframework.web.client.HttpClientErrorException
-import org.springframework.web.client.RestTemplate
 import kotlin.test.assertEquals
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Sql(value = ["/db/clean.sql", "/db/GetPlaceController.sql"])
-public class GetPlaceControllerTest : ClientHttpRequestInterceptor {
+public class GetPlaceControllerTest : AbstractLanguageAwareControllerTest() {
     @LocalServerPort
     val port: Int = 0
-
-    private var language: String? = null
-
-    private val rest = RestTemplate()
-
-    @BeforeEach
-    fun setUp() {
-        language = null
-        rest.interceptors = listOf(this)
-    }
 
     @Test
     fun get() {
@@ -46,6 +30,7 @@ public class GetPlaceControllerTest : ClientHttpRequestInterceptor {
         val place = response.body!!.place
         assertEquals(100L, place.id)
         assertEquals("Yaounde", place.name)
+        assertEquals("Yaounde, Cameroon", place.longName)
         assertEquals("Africa/Douala", place.timezoneId)
         assertEquals("CM", place.country)
         assertEquals(1.1, place.longitude)
@@ -66,6 +51,7 @@ public class GetPlaceControllerTest : ClientHttpRequestInterceptor {
         val place = response.body!!.place
         assertEquals(100L, place.id)
         assertEquals("Yaoude_e_", place.name)
+        assertEquals("Yaoude_e_, Cameroun", place.longName)
         assertEquals("Africa/Douala", place.timezoneId)
         assertEquals("CM", place.country)
         assertEquals(1.1, place.longitude)
@@ -87,15 +73,4 @@ public class GetPlaceControllerTest : ClientHttpRequestInterceptor {
     }
 
     private fun url(id: Long) = "http://localhost:$port/v1/places/$id"
-
-    override fun intercept(
-        request: HttpRequest,
-        body: ByteArray,
-        execution: ClientHttpRequestExecution
-    ): ClientHttpResponse {
-        if (language != null) {
-            request.headers.add("Accept-Language", language)
-        }
-        return execution.execute(request, body)
-    }
 }

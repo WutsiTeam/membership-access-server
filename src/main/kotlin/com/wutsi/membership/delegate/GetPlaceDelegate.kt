@@ -18,6 +18,7 @@ public class GetPlaceDelegate(
             place = Place(
                 id = place.id,
                 name = service.getName(place, language),
+                longName = service.getLongName(place, language),
                 latitude = place.latitude,
                 longitude = place.longitude,
                 country = place.country,
