@@ -10,7 +10,7 @@ public data class SearchAccountRequest(
     public val accountIds: List<Long> = emptyList(),
     public val phoneNumber: String? = null,
     public val status: String? = null,
-    public val isBusiness: Boolean? = null,
+    public val business: Boolean? = null,
     public val limit: Int = 100,
     public val offset: Int = 0
 )

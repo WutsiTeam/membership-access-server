@@ -11,9 +11,9 @@ CREATE TABLE T_PHONE(
 CREATE TABLE T_ACCOUNT(
     id            SERIAL NOT NULL,
 
-    phone_fk      BIGINT REFERENCES T_PHONE(id),
+    phone_fk      BIGINT NOT NULL REFERENCES T_PHONE(id),
+    city_fk       BIGINT NOT NULL REFERENCES T_PLACE(id),
     category_fk   BIGINT REFERENCES T_CATEGORY(id),
-    city_fk       BIGINT REFERENCES T_PLACE(id),
 
     super_user    BOOLEAN NOT NULL DEFAULT false,
     business      BOOL NOT NULL DEFAULT false,

@@ -10,15 +10,15 @@ public data class AccountSummary(
     public val id: Long = 0,
     public val pictureUrl: String? = null,
     public val status: String = "",
-    public val displayName: String? = null,
+    public val displayName: String = "",
     public val language: String = "",
     public val country: String = "",
     @get:DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
     public val created: OffsetDateTime = OffsetDateTime.now(),
     @get:DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
     public val updated: OffsetDateTime = OffsetDateTime.now(),
-    public val isSuperUser: Boolean = false,
-    public val isBusiness: Boolean = false,
+    public val superUser: Boolean = false,
+    public val business: Boolean = false,
     public val city: Place = Place(),
     public val category: Category = Category()
 )

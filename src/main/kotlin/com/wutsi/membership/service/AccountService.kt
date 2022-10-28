@@ -2,9 +2,11 @@ package com.wutsi.membership.service
 
 import com.wutsi.membership.dao.AccountRepository
 import com.wutsi.membership.dto.Account
+import com.wutsi.membership.dto.AccountSummary
 import com.wutsi.membership.dto.Category
 import com.wutsi.membership.dto.CreateAccountRequest
 import com.wutsi.membership.dto.EnableBusinessRequest
+import com.wutsi.membership.dto.SearchAccountRequest
 import com.wutsi.membership.dto.UpdateAccountAttributeRequest
 import com.wutsi.membership.entity.AccountEntity
 import com.wutsi.membership.entity.AccountStatus
@@ -18,13 +20,16 @@ import com.wutsi.platform.core.error.exception.ConflictException
 import com.wutsi.platform.core.error.exception.NotFoundException
 import org.springframework.stereotype.Service
 import java.time.ZoneOffset
+import javax.persistence.EntityManager
+import javax.persistence.Query
 
 @Service
 class AccountService(
     private val dao: AccountRepository,
     private val placeService: PlaceService,
     private val phoneService: PhoneService,
-    private val categoryService: CategoryService
+    private val categoryService: CategoryService,
+    private val em: EntityManager
 ) {
     companion object {
         const val DEFAULT_LANGUAGE = "en"
@@ -170,6 +175,91 @@ class AccountService(
         category = account.category?.let { categoryService.toCategory(it, language) } ?: Category(),
         city = placeService.toPlace(account.city, language)
     )
+
+    fun toAccountSummary(account: AccountEntity, language: String?) = AccountSummary(
+        id = account.id ?: -1,
+        displayName = account.displayName,
+        pictureUrl = account.pictureUrl,
+        country = account.country,
+        language = account.language,
+        status = account.status.name,
+        business = account.business,
+        superUser = account.superUser,
+        created = account.created.toInstant().atOffset(ZoneOffset.UTC),
+        updated = account.updated.toInstant().atOffset(ZoneOffset.UTC),
+        category = account.category?.let { categoryService.toCategory(it, language) } ?: Category(),
+        city = placeService.toPlace(account.city, language)
+    )
+
+    fun search(request: SearchAccountRequest): List<AccountEntity> {
+        val query = em.createQuery(sql(request))
+        parameters(request, query)
+        return query
+            .setFirstResult(request.offset)
+            .setMaxResults(request.limit)
+            .resultList as List<AccountEntity>
+    }
+
+    private fun sql(request: SearchAccountRequest): String {
+        val select = select()
+        val where = where(request)
+        val order = order(request)
+        return if (where.isNullOrEmpty()) {
+            select
+        } else {
+            "$select WHERE $where $order"
+        }
+    }
+
+    private fun order(request: SearchAccountRequest): String =
+        "ORDER BY a.displayName"
+
+    private fun select(): String =
+        "SELECT a FROM AccountEntity a"
+
+    private fun where(request: SearchAccountRequest): String {
+        val criteria = mutableListOf<String>()
+
+        if (!request.phoneNumber.isNullOrEmpty()) {
+            criteria.add("a.phone.number=:phone_number")
+        }
+        if (request.accountIds.isNotEmpty()) {
+            criteria.add("a.id IN :ids")
+        }
+        if (request.business != null) {
+            criteria.add("a.business=:business")
+        }
+        if (request.status != null) {
+            criteria.add("a.status=:status")
+        }
+        return criteria.joinToString(separator = " AND ")
+    }
+
+    private fun parameters(request: SearchAccountRequest, query: Query) {
+        if (!request.phoneNumber.isNullOrEmpty()) {
+            query.setParameter("phone_number", normalizePhoneNumber(request.phoneNumber))
+        }
+        if (request.accountIds.isNotEmpty()) {
+            query.setParameter("ids", request.accountIds)
+        }
+        if (request.business != null) {
+            query.setParameter("business", request.business)
+        }
+        if (request.status != null) {
+            query.setParameter("status", AccountStatus.valueOf(request.status.uppercase()))
+        }
+    }
+
+    private fun normalizePhoneNumber(phoneNumber: String?): String? {
+        phoneNumber ?: return null
+
+        val value = phoneNumber.trim()
+        return if (value.startsWith("+")) {
+            value
+        } else {
+            "+$value"
+        }
+    }
 
     private fun ensureNotAssigned(phone: PhoneEntity) {
         val account = dao.findByPhoneAndStatus(phone, AccountStatus.ACTIVE)

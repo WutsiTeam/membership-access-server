@@ -1,7 +1,10 @@
 package com.wutsi.membership.dto
 
-import org.springframework.format.annotation.DateTimeFormat
+import org.springframework.format.`annotation`.DateTimeFormat
 import java.time.OffsetDateTime
+import kotlin.Boolean
+import kotlin.Long
+import kotlin.String
 
 public data class Account(
     public val id: Long = 0,
@@ -30,6 +33,5 @@ public data class Account(
     public val facebookId: String? = null,
     public val instagramId: String? = null,
     public val twitterId: String? = null,
-    public val youtubeId: String? = null,
-    public val fcmToken: String? = null
+    public val youtubeId: String? = null
 )

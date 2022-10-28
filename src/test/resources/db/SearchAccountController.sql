@@ -1,0 +1,25 @@
+INSERT INTO T_PLACE(id, name, name_french, country, timezone_id, longitude, latitude)
+    VALUES
+        (100, 'Yaounde', 'Yaoundé', 'CM', 'Africa/Douala', 1.1, 2.2),
+        (101, 'Douala', 'Douala', 'CM', 'Africa/Douala', 1.1, 2.2),
+        (102, 'Baffoussam', 'Baffoussam', 'CM', 'Africa/Douala', 1.1, 2.2)
+    ;
+
+INSERT INTO T_PHONE(id, number, country)
+    VALUES
+        (100, '+237221234100', 'CM'),
+        (101, '+237221234111', 'CM'),
+        (102, '+237221234112', 'CM'),
+        (103, '+237221234113', 'CM')
+;
+
+INSERT INTO T_ACCOUNT(id, phone_fk, city_fk, display_name, picture_url, status, language, super_user, business, country)
+    VALUES
+        (100, 100, 100, 'Ray Sponsible', 'https://me.com/12343/picture.png', 1, 'fr', true, true, 'CM'),
+        (101, 101, 102, 'John Smith', 'https://me.com/111/picture.png', 1, 'fr', false, false, 'CM'),
+        (102, 102, 102, 'Roger Milla', 'https://me.com/111/picture.png', 1, 'fr', false, true, 'CM'),
+        (888, 200, 100, 'John Smith', 'https://me.com/111/picture.png', 1, 'fr', false, false, 'CM'),
+
+        (300, 103, 100, 'John Smith (suspended)', 'https://me.com/111/picture.png', 2, 'fr', false, false, 'CM'),
+        (301, 103, 102, 'John Smith', 'https://me.com/111/picture.png', 1, 'fr', false, false, 'CM')
+    ;
