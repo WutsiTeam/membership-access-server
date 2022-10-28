@@ -21,7 +21,7 @@ class GetAccountControllerTest {
     private val rest = RestTemplate()
 
     @Test
-    fun get() {
+    fun active() {
         val response = rest.getForEntity(url(100), GetAccountResponse::class.java)
 
         assertEquals(200, response.statusCodeValue)
@@ -54,6 +54,17 @@ class GetAccountControllerTest {
         assertNotNull(account.category)
         assertEquals(1000, account.category.id)
         assertEquals("Advertising/Marketing", account.category.title)
+    }
+
+    @Test
+    fun suspended() {
+        val response = rest.getForEntity(url(199), GetAccountResponse::class.java)
+
+        assertEquals(200, response.statusCodeValue)
+
+        val account = response.body!!.account
+        assertEquals("SUSPENDED", account.status)
+        assertNotNull(account.suspended)
     }
 
     private fun url(id: Long) = "http://localhost:$port/v1/accounts/$id"

@@ -11,9 +11,9 @@ INSERT INTO T_PHONE(id, number, country)
         (300, '+237221234300', 'CM')
 ;
 
-INSERT INTO T_ACCOUNT(id, phone_fk, status, display_name, country, language)
+INSERT INTO T_ACCOUNT(id, phone_fk, city_fk, status, display_name, country, language)
     VALUES
-        (101, 101, 1, 'Yo man', 'CM', 'fr'),
-        (200, 200, 1, 'John Doe', 'CM', 'fr'),
-        (300, 300, 2, 'Roger Milla - Suspended', 'CM', 'fr')
+        (101, 101, 100, 1, 'Yo man', 'CM', 'fr'),
+        (200, 200, 100, 1, 'John Doe', 'CM', 'fr'),
+        (300, 300, 100, 2, 'Roger Milla - Suspended', 'CM', 'fr')
 ;

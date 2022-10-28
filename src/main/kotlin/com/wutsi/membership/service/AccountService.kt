@@ -8,6 +8,7 @@ import com.wutsi.membership.dto.CreateAccountRequest
 import com.wutsi.membership.dto.EnableBusinessRequest
 import com.wutsi.membership.dto.SearchAccountRequest
 import com.wutsi.membership.dto.UpdateAccountAttributeRequest
+import com.wutsi.membership.dto.UpdateAccountStatusRequest
 import com.wutsi.membership.entity.AccountEntity
 import com.wutsi.membership.entity.AccountStatus
 import com.wutsi.membership.entity.PhoneEntity
@@ -20,6 +21,7 @@ import com.wutsi.platform.core.error.exception.ConflictException
 import com.wutsi.platform.core.error.exception.NotFoundException
 import org.springframework.stereotype.Service
 import java.time.ZoneOffset
+import java.util.Date
 import javax.persistence.EntityManager
 import javax.persistence.Query
 
@@ -90,6 +92,16 @@ class AccountService(
         }
         dao.save(account)
         return account
+    }
+
+    fun status(id: Long, request: UpdateAccountStatusRequest): AccountEntity? {
+        val account = findById(id, true)
+        when (request.status.uppercase()) {
+            AccountStatus.ACTIVE.name -> activate(account)
+            AccountStatus.SUSPENDED.name -> suspend(account)
+            else -> return null
+        }
+        return dao.save(account)
     }
 
     fun enableBusiness(id: Long, request: EnableBusinessRequest): AccountEntity {
@@ -248,6 +260,16 @@ class AccountService(
         if (request.status != null) {
             query.setParameter("status", AccountStatus.valueOf(request.status.uppercase()))
         }
+    }
+
+    private fun activate(account: AccountEntity) {
+        account.status = AccountStatus.ACTIVE
+        account.suspended = null
+    }
+
+    private fun suspend(account: AccountEntity) {
+        account.status = AccountStatus.SUSPENDED
+        account.suspended = Date()
     }
 
     private fun normalizePhoneNumber(phoneNumber: String?): String? {
