@@ -17,8 +17,8 @@ public data class AccountSummary(
     public val created: OffsetDateTime = OffsetDateTime.now(),
     @get:DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
     public val updated: OffsetDateTime = OffsetDateTime.now(),
-    public val superUser: Boolean = false,
-    public val business: Boolean = false,
-    public val categoryId: Long? = null,
-    public val cityId: Long? = null
+    public val isSuperUser: Boolean = false,
+    public val isBusiness: Boolean = false,
+    public val city: Place = Place(),
+    public val category: Category = Category()
 )

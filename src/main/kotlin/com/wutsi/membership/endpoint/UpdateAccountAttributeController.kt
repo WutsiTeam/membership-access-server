@@ -8,19 +8,17 @@ import org.springframework.web.bind.`annotation`.RequestBody
 import org.springframework.web.bind.`annotation`.RestController
 import javax.validation.Valid
 import kotlin.Long
-import kotlin.String
 
 @RestController
 public class UpdateAccountAttributeController(
     public val `delegate`: UpdateAccountAttributeDelegate
 ) {
-    @PostMapping("/v1/accounts/{id}/attributes/{name}")
+    @PostMapping("/v1/accounts/{id}/attributes")
     public fun invoke(
         @PathVariable(name = "id") id: Long,
-        @PathVariable(name = "name") name: String,
         @Valid @RequestBody
         request: UpdateAccountAttributeRequest
     ) {
-        delegate.invoke(id, name, request)
+        delegate.invoke(id, request)
     }
 }

@@ -19,8 +19,8 @@
   </parent>
 
   <properties>
-    <jacoco.threshold.line>0.68</jacoco.threshold.line>
-    <jacoco.threshold.class>0.68</jacoco.threshold.class>
+    <jacoco.threshold.line>0.78</jacoco.threshold.line>
+    <jacoco.threshold.class>0.78</jacoco.threshold.class>
     <jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
     <jdk.version>11</jdk.version>
 
@@ -31,6 +31,7 @@
     <klint.version>0.47.1</klint.version>
     <maven-antrun-plugin.version>3.1.0</maven-antrun-plugin.version>
     <hikari-cp.version>5.0.1</hikari-cp.version>
+    <libphonenumber.version>8.12.52</libphonenumber.version>
     <mysql.version>8.0.31</mysql.version>
     <flyway.version>9.3.0</flyway.version>
     <wutsi-platform-core.version>0.0.175</wutsi-platform-core.version>
@@ -42,6 +43,12 @@
       <artifactId>wutsi-platform-core</artifactId>
       <version>${wutsi-platform-core.version}</version>
     </dependency>
+    <dependency>
+      <groupId>com.googlecode.libphonenumber</groupId>
+      <artifactId>libphonenumber</artifactId>
+      <version>${libphonenumber.version}</version>
+    </dependency>
+
     <dependency>
       <groupId>org.jetbrains.kotlin</groupId>
       <artifactId>kotlin-stdlib</artifactId>
