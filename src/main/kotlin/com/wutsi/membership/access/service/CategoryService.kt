@@ -31,7 +31,7 @@ class CategoryService(private val dao: CategoryRepository) {
         dao.findAll()
             .toList()
 
-    fun getTitle(category: CategoryEntity, language: String?) =
+    private fun getTitle(category: CategoryEntity, language: String?) =
         when (language?.lowercase()) {
             "fr" -> category.titleFrench
             else -> category.title

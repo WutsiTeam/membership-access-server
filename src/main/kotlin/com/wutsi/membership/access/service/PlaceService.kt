@@ -55,7 +55,7 @@ class PlaceService(
         return dao.save(place)
     }
 
-    fun getName(place: PlaceEntity, language: String?) =
+    private fun getName(place: PlaceEntity, language: String?) =
         when (language?.lowercase()) {
             "fr" -> place.nameFrench
             else -> place.name
