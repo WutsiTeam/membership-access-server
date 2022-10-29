@@ -5,7 +5,7 @@ import com.wutsi.membership.dao.AccountRepository
 import com.wutsi.membership.dao.PhoneRepository
 import com.wutsi.membership.dto.CreateAccountRequest
 import com.wutsi.membership.dto.CreateAccountResponse
-import com.wutsi.membership.entity.AccountStatus
+import com.wutsi.membership.enums.AccountStatus
 import com.wutsi.membership.error.ErrorURN
 import com.wutsi.platform.core.error.ErrorResponse
 import org.junit.jupiter.api.Test

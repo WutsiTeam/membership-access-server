@@ -6,7 +6,7 @@ import com.wutsi.membership.dto.PlaceSummary
 import com.wutsi.membership.dto.SavePlaceRequest
 import com.wutsi.membership.dto.SearchPlaceRequest
 import com.wutsi.membership.entity.PlaceEntity
-import com.wutsi.membership.entity.PlaceType
+import com.wutsi.membership.enums.PlaceType
 import com.wutsi.membership.error.ErrorURN
 import com.wutsi.platform.core.error.Error
 import com.wutsi.platform.core.error.Parameter

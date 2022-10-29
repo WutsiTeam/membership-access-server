@@ -1,4 +1,4 @@
-package com.wutsi.membership.entity
+package com.wutsi.membership.enums
 
 enum class AccountStatus {
     UNKNOWN,

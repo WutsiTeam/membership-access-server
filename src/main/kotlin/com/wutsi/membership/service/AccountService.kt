@@ -11,8 +11,8 @@ import com.wutsi.membership.dto.SearchAccountRequest
 import com.wutsi.membership.dto.UpdateAccountAttributeRequest
 import com.wutsi.membership.dto.UpdateAccountStatusRequest
 import com.wutsi.membership.entity.AccountEntity
-import com.wutsi.membership.entity.AccountStatus
 import com.wutsi.membership.entity.PhoneEntity
+import com.wutsi.membership.enums.AccountStatus
 import com.wutsi.membership.error.ErrorURN
 import com.wutsi.platform.core.error.Error
 import com.wutsi.platform.core.error.Parameter

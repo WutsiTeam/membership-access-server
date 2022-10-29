@@ -2,7 +2,7 @@ package com.wutsi.membership.endpoint
 
 import com.wutsi.membership.dto.SearchAccountRequest
 import com.wutsi.membership.dto.SearchAccountResponse
-import com.wutsi.membership.entity.AccountStatus
+import com.wutsi.membership.enums.AccountStatus
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest

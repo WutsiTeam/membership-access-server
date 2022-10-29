@@ -2,7 +2,7 @@ package com.wutsi.membership.endpoint
 
 import com.wutsi.membership.dto.SearchPlaceRequest
 import com.wutsi.membership.dto.SearchPlaceResponse
-import com.wutsi.membership.entity.PlaceType
+import com.wutsi.membership.enums.PlaceType
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.server.LocalServerPort
