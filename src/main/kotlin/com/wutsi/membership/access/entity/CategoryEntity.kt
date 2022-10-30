@@ -10,5 +10,6 @@ data class CategoryEntity(
     @Id
     val id: Long = -1,
     var title: String = "",
-    var titleFrench: String? = null
+    var titleFrench: String? = null,
+    var titleFrenchAscii: String? = null
 )

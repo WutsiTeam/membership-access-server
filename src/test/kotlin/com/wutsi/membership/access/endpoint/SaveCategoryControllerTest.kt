@@ -34,6 +34,7 @@ class SaveCategoryControllerTest : AbstractLanguageAwareControllerTest() {
         assertTrue(category.isPresent)
         assertEquals(request.title, category.get().title)
         assertNull(category.get().titleFrench)
+        assertNull(category.get().titleFrenchAscii)
     }
 
     @Test
@@ -52,6 +53,7 @@ class SaveCategoryControllerTest : AbstractLanguageAwareControllerTest() {
         assertTrue(category.isPresent)
         assertEquals("Advertising/Marketing", category.get().title)
         assertEquals(request.title, category.get().titleFrench)
+        assertEquals("Marketing/Publicite", category.get().titleFrenchAscii)
     }
 
     private fun url(id: Long) = "http://localhost:$port/v1/categories/$id"

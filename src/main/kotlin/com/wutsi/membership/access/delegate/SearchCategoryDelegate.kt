@@ -5,7 +5,6 @@ import com.wutsi.membership.access.dto.SearchCategoryResponse
 import com.wutsi.membership.access.service.CategoryService
 import com.wutsi.platform.core.logging.KVLogger
 import org.springframework.stereotype.Service
-import java.lang.Integer.min
 import javax.servlet.http.HttpServletRequest
 
 @Service
@@ -21,20 +20,11 @@ class SearchCategoryDelegate(
         val language = httpRequest.getHeader("Accept-Language")
         logger.add("language", language)
 
-        val categories = service.findAll()
+        val categories = service.search(request, language)
         logger.add("count", categories.size)
 
-        return if (request.offset >= categories.size) {
-            SearchCategoryResponse()
-        } else {
-            SearchCategoryResponse(
-                categories = categories.map { service.toCategorySummary(it, language) }
-                    .sortedBy { it.title }
-                    .subList(
-                        request.offset,
-                        min(request.offset + request.limit, categories.size)
-                    )
-            )
-        }
+        return SearchCategoryResponse(
+            categories = categories.map { service.toCategorySummary(it, language) }
+        )
     }
 }
