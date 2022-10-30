@@ -17,7 +17,6 @@ java -jar ${CODEGEN_JAR} server \
     -github_project ${API_NAME}-server \
     -heroku ${API_NAME}-server \
     -service_aws_mysql \
-    -service_cache \
     -service_logger \
     -service_slack
 

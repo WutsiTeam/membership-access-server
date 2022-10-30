@@ -66,21 +66,6 @@ wutsi:
     security:
       type: none
       api-key: "---- none -----"
-    cache:
-      name: ${wutsi.application.name}
-      type: local
-    messaging:
-      sms:
-        type: none
-      push:
-        type: none
-      url-shortener:
-        type: none
-      whatsapp:
-        type: none
-    stream:
-      name: ${wutsi.application.name}
-      type: local
     tracing:
       client-id: ${wutsi.application.name}
       device-id-provider:
