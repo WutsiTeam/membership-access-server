@@ -12,7 +12,7 @@ data class PlaceEntity(
     @Id
     var id: Long = -1,
     var name: String = "",
-    var nameFrench: String = "",
+    var nameAscii: String = "",
     var country: String = "",
     var longitude: Double? = null,
     var latitude: Double? = null,

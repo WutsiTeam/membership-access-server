@@ -8,12 +8,12 @@ import org.springframework.stereotype.Service
 import javax.servlet.http.HttpServletRequest
 
 @Service
-public class SearchPlaceDelegate(
+class SearchPlaceDelegate(
     private val service: PlaceService,
     private val httpRequest: HttpServletRequest,
     private val logger: KVLogger
 ) {
-    public fun invoke(request: SearchPlaceRequest): SearchPlaceResponse {
+    fun invoke(request: SearchPlaceRequest): SearchPlaceResponse {
         logger.add("request_country", request.country)
         logger.add("request_keyboard", request.keyword)
         logger.add("request_type", request.type)

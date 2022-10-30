@@ -46,7 +46,7 @@ class PlaceService(
             .orElse(PlaceEntity())
         place.id = request.id
         place.name = request.name
-        place.nameFrench = request.nameFrench
+        place.nameAscii = StringUtil.toAscii(request.name)
         place.longitude = request.longitude
         place.latitude = request.latitude
         place.timezoneId = request.timezoneId
@@ -55,17 +55,10 @@ class PlaceService(
         return dao.save(place)
     }
 
-    private fun getName(place: PlaceEntity, language: String?) =
-        when (language?.lowercase()) {
-            "fr" -> place.nameFrench
-            else -> place.name
-        }
-
     fun getLongName(place: PlaceEntity, language: String?): String {
         val locale = Locale(language ?: "en", place.country)
-        val name = getName(place, language)
         val displayCountry = locale.getDisplayCountry(locale)
-        return "$name, $displayCountry"
+        return "${place.name}, $displayCountry"
     }
 
     fun search(request: SearchPlaceRequest): List<PlaceEntity> {
@@ -79,7 +72,7 @@ class PlaceService(
 
     fun toPlace(place: PlaceEntity, language: String?) = Place(
         id = place.id,
-        name = getName(place, language),
+        name = place.name,
         longName = getLongName(place, language),
         latitude = place.latitude,
         longitude = place.longitude,
@@ -90,7 +83,7 @@ class PlaceService(
 
     fun toPlaceSummary(place: PlaceEntity, language: String?) = PlaceSummary(
         id = place.id,
-        name = getName(place, language),
+        name = place.name,
         longName = getLongName(place, language),
         country = place.country,
         type = place.type.name
@@ -102,7 +95,7 @@ class PlaceService(
         return if (where.isNullOrEmpty()) {
             select
         } else {
-            "$select WHERE $where ORDER BY a.name"
+            "$select WHERE $where ORDER BY a.nameAscii"
         }
     }
 
@@ -119,7 +112,7 @@ class PlaceService(
             criteria.add("a.type = :type")
         }
         if (request.keyword != null) {
-            criteria.add("UCASE(a.name) LIKE :keyword")
+            criteria.add("UCASE(a.nameAscii) LIKE :keyword")
         }
         return criteria.joinToString(separator = " AND ")
     }

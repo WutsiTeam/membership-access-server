@@ -27,8 +27,7 @@ public class SavePlaceControllerTest {
     fun create() {
         val request = SavePlaceRequest(
             id = 11111,
-            name = "Yo",
-            nameFrench = "Man",
+            name = "Domé",
             timezoneId = "Africa/Abidjan",
             country = "ci",
             longitude = 1111.0,
@@ -41,7 +40,7 @@ public class SavePlaceControllerTest {
 
         val place = dao.findById(request.id).get()
         assertEquals(request.name, place.name)
-        assertEquals(request.nameFrench, place.nameFrench)
+        assertEquals("Dome", place.nameAscii)
         assertEquals(request.country.uppercase(), place.country)
         assertEquals(request.timezoneId, place.timezoneId)
         assertEquals(request.longitude, place.longitude)
@@ -53,8 +52,7 @@ public class SavePlaceControllerTest {
     fun update() {
         val request = SavePlaceRequest(
             id = 100,
-            name = "Yo",
-            nameFrench = "Man",
+            name = "Yagoué",
             timezoneId = "Africa/Abidjan",
             country = "CI",
             longitude = 1111.0,
@@ -67,7 +65,7 @@ public class SavePlaceControllerTest {
 
         val place = dao.findById(request.id).get()
         assertEquals(request.name, place.name)
-        assertEquals(request.nameFrench, place.nameFrench)
+        assertEquals("Yagoue", place.nameAscii)
         assertEquals(request.country, place.country)
         assertEquals(request.timezoneId, place.timezoneId)
         assertEquals(request.longitude, place.longitude)

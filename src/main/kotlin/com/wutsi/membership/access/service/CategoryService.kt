@@ -41,7 +41,7 @@ class CategoryService(
         when (language?.lowercase()) {
             "fr" -> {
                 category.titleFrench = request.title
-                category.titleFrenchAscii = StringUtil.unaccent(request.title)
+                category.titleFrenchAscii = StringUtil.toAscii(request.title)
             }
             else -> category.title = request.title
         }
@@ -113,7 +113,7 @@ class CategoryService(
             query.setParameter("category_ids", request.categoryIds)
         }
         if (!request.keyword.isNullOrEmpty()) {
-            query.setParameter("keyword", StringUtil.unaccent(request.keyword).uppercase() + "%")
+            query.setParameter("keyword", StringUtil.toAscii(request.keyword).uppercase() + "%")
         }
     }
 }

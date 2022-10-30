@@ -29,8 +29,8 @@ public class GetPlaceControllerTest : AbstractLanguageAwareControllerTest() {
 
         val place = response.body!!.place
         assertEquals(100L, place.id)
-        assertEquals("Yaounde", place.name)
-        assertEquals("Yaounde, Cameroon", place.longName)
+        assertEquals("Yaoundé", place.name)
+        assertEquals("Yaoundé, Cameroon", place.longName)
         assertEquals("Africa/Douala", place.timezoneId)
         assertEquals("CM", place.country)
         assertEquals(1.1, place.longitude)
@@ -50,8 +50,8 @@ public class GetPlaceControllerTest : AbstractLanguageAwareControllerTest() {
 
         val place = response.body!!.place
         assertEquals(100L, place.id)
-        assertEquals("Yaoude_e_", place.name)
-        assertEquals("Yaoude_e_, Cameroun", place.longName)
+        assertEquals("Yaoundé", place.name)
+        assertEquals("Yaoundé, Cameroun", place.longName)
         assertEquals("Africa/Douala", place.timezoneId)
         assertEquals("CM", place.country)
         assertEquals(1.1, place.longitude)

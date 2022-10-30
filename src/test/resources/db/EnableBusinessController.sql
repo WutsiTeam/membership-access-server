@@ -1,7 +1,7 @@
 INSERT INTO T_CATEGORY(id,title,title_french) VALUES (1000,'Advertising/Marketing','Marketing publicitaire');
 INSERT INTO T_CATEGORY(id,title,title_french) VALUES (1001,'Agriculture','Agriculture');
 
-INSERT INTO T_PLACE(id, name, name_french, country, timezone_id, longitude, latitude)
+INSERT INTO T_PLACE(id, name, name_ascii, country, timezone_id, longitude, latitude)
     VALUES
         (100, 'Yaounde', 'Yaoude_e_', 'CM', 'Africa/Douala', 1.1, 2.2),
         (200, 'Douable', 'Douala', 'CM', 'Africa/Douala', 1.1, 2.2);

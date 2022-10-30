@@ -11,8 +11,6 @@ public data class SavePlaceRequest(
     @get:NotBlank
     public val name: String = "",
     @get:NotBlank
-    public val nameFrench: String = "",
-    @get:NotBlank
     @get:Size(max = 2)
     public val country: String = "",
     @get:NotBlank

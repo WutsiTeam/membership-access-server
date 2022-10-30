@@ -1,4 +1,4 @@
-INSERT INTO T_PLACE(id, name, name_french, country, timezone_id, longitude, latitude)
+INSERT INTO T_PLACE(id, name, name_ascii, country, timezone_id, longitude, latitude)
     VALUES
         (100, 'Yaounde', 'Yaoundé', 'CM', 'Africa/Douala', 1.1, 2.2),
         (101, 'Douala', 'Douala', 'CM', 'Africa/Douala', 1.1, 2.2),
