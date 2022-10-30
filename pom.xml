@@ -7,7 +7,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <artifactId>membership-access-server</artifactId>
-  <groupId>com.wutsi.membership</groupId>
+  <groupId>com.wutsi.membership.access</groupId>
   <version>1.0.0</version>
   <packaging>jar</packaging>
   <name>membership-access-server</name>
