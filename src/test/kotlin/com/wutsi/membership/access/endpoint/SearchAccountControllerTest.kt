@@ -105,4 +105,32 @@ class SearchAccountControllerTest {
         assertEquals(100, accounts[0].id)
         assertEquals(101, accounts[1].id)
     }
+
+    @Test
+    fun `stores`() {
+        val request = SearchAccountRequest(
+            store = true
+        )
+        val response = rest.postForEntity(url, request, SearchAccountResponse::class.java)
+
+        assertEquals(200, response.statusCodeValue)
+
+        val accounts = response.body!!.accounts
+        assertEquals(1, accounts.size)
+        assertEquals(100L, accounts[0].id)
+        assertEquals(9100L, accounts[0].storeId)
+    }
+
+    @Test
+    fun `non-stores`() {
+        val request = SearchAccountRequest(
+            store = false
+        )
+        val response = rest.postForEntity(url, request, SearchAccountResponse::class.java)
+
+        assertEquals(200, response.statusCodeValue)
+
+        val accounts = response.body!!.accounts
+        assertEquals(5, accounts.size)
+    }
 }

@@ -185,6 +185,20 @@ class UpdateAccountAttributeControllerTest {
         assertEquals(value, account.youtubeId)
     }
 
+    @Test
+    fun `set store-id`() {
+        val value = "111"
+        val account = testAttibute("store-id", value)
+        assertEquals(value.toLong(), account.storeId)
+    }
+
+    @Test
+    fun `set wallet-id`() {
+        val value = "111"
+        val account = testAttibute("wallet-id", value)
+        assertEquals(value.toLong(), account.walletId)
+    }
+
     private fun testAttibute(name: String, value: String?): AccountEntity {
         val request = UpdateAccountAttributeRequest(
             name = name,

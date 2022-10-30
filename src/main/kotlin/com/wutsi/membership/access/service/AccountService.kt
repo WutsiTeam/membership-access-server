@@ -80,6 +80,8 @@ class AccountService(
             "instagram-id" -> account.instagramId = toString(request.value)
             "twitter-id" -> account.twitterId = toString(request.value)
             "youtube-id" -> account.youtubeId = toString(request.value)
+            "wallet-id" -> account.walletId = toLong(request.value)
+            "store-id" -> account.storeId = toLong(request.value)
             else -> throw BadRequestException(
                 error = Error(
                     code = ErrorURN.ATTRIBUTE_NOT_VALID.urn,
@@ -186,7 +188,9 @@ class AccountService(
         updated = account.updated.toInstant().atOffset(ZoneOffset.UTC),
         phone = phoneService.toPhone(account.phone),
         category = account.category?.let { categoryService.toCategory(it, language) } ?: Category(),
-        city = placeService.toPlace(account.city, language)
+        city = placeService.toPlace(account.city, language),
+        walletId = account.walletId,
+        storeId = account.storeId
     )
 
     fun toAccountSummary(account: AccountEntity, language: String?) = AccountSummary(
@@ -201,7 +205,9 @@ class AccountService(
         created = account.created.toInstant().atOffset(ZoneOffset.UTC),
         updated = account.updated.toInstant().atOffset(ZoneOffset.UTC),
         category = account.category?.let { categoryService.toCategorySummary(it, language) } ?: CategorySummary(),
-        city = placeService.toPlaceSummary(account.city, language)
+        city = placeService.toPlaceSummary(account.city, language),
+        walletId = account.walletId,
+        storeId = account.storeId
     )
 
     fun search(request: SearchAccountRequest): List<AccountEntity> {
@@ -241,6 +247,11 @@ class AccountService(
         }
         if (request.business != null) {
             criteria.add("a.business=:business")
+        }
+        if (request.store == true) {
+            criteria.add("a.storeId IS NOT NULL")
+        } else if (request.store == false) {
+            criteria.add("a.storeId IS NULL")
         }
         if (request.status != null) {
             criteria.add("a.status=:status")
