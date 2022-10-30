@@ -9,10 +9,12 @@ import org.junit.jupiter.api.assertThrows
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.server.LocalServerPort
 import org.springframework.http.HttpStatus
+import org.springframework.test.context.jdbc.Sql
 import org.springframework.web.client.HttpClientErrorException
 import kotlin.test.assertEquals
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@Sql(value = ["/db/clean.sql", "/db/GetCategoryController.sql"])
 class GetCategoryControllerTest : AbstractLanguageAwareControllerTest() {
     @LocalServerPort
     val port: Int = 0

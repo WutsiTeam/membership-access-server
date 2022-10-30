@@ -9,6 +9,6 @@ import javax.persistence.Table
 data class CategoryEntity(
     @Id
     val id: Long = -1,
-    val title: String = "",
-    val titleFrench: String = ""
+    var title: String = "",
+    var titleFrench: String? = null
 )

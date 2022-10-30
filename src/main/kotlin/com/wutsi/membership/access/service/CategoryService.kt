@@ -3,6 +3,7 @@ package com.wutsi.membership.access.service
 import com.wutsi.membership.access.dao.CategoryRepository
 import com.wutsi.membership.access.dto.Category
 import com.wutsi.membership.access.dto.CategorySummary
+import com.wutsi.membership.access.dto.SaveCategoryRequest
 import com.wutsi.membership.access.entity.CategoryEntity
 import com.wutsi.membership.access.error.ErrorURN
 import com.wutsi.platform.core.error.Error
@@ -31,9 +32,20 @@ class CategoryService(private val dao: CategoryRepository) {
         dao.findAll()
             .toList()
 
-    private fun getTitle(category: CategoryEntity, language: String?) =
+    fun save(id: Long, request: SaveCategoryRequest, language: String?): CategoryEntity {
+        val category = dao.findById(id)
+            .orElse(CategoryEntity(id = id))
+
         when (language?.lowercase()) {
-            "fr" -> category.titleFrench
+            "fr" -> category.titleFrench = request.title
+            else -> category.title = request.title
+        }
+        return dao.save(category)
+    }
+
+    private fun getTitle(category: CategoryEntity, language: String?): String =
+        when (language?.lowercase()) {
+            "fr" -> category.titleFrench ?: category.title
             else -> category.title
         }
 

@@ -6,10 +6,12 @@ import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.server.LocalServerPort
 import org.springframework.http.HttpStatus
+import org.springframework.test.context.jdbc.Sql
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@Sql(value = ["/db/clean.sql", "/db/SearchCategoryController.sql"])
 class SearchCategoryControllerTest : AbstractLanguageAwareControllerTest() {
     @LocalServerPort
     val port: Int = 0
