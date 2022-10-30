@@ -1,4 +1,4 @@
-package com.wutsi.membership.access.service
+package com.wutsi.membership.access.util
 
 import java.text.Normalizer
 

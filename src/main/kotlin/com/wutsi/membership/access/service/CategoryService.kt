@@ -7,6 +7,7 @@ import com.wutsi.membership.access.dto.SaveCategoryRequest
 import com.wutsi.membership.access.dto.SearchCategoryRequest
 import com.wutsi.membership.access.entity.CategoryEntity
 import com.wutsi.membership.access.error.ErrorURN
+import com.wutsi.membership.access.util.StringUtil
 import com.wutsi.platform.core.error.Error
 import com.wutsi.platform.core.error.Parameter
 import com.wutsi.platform.core.error.ParameterType

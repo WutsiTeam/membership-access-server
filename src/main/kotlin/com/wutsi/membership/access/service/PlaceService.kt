@@ -8,6 +8,7 @@ import com.wutsi.membership.access.dto.SearchPlaceRequest
 import com.wutsi.membership.access.entity.PlaceEntity
 import com.wutsi.membership.access.enums.PlaceType
 import com.wutsi.membership.access.error.ErrorURN
+import com.wutsi.membership.access.util.StringUtil
 import com.wutsi.platform.core.error.Error
 import com.wutsi.platform.core.error.Parameter
 import com.wutsi.platform.core.error.ParameterType
