@@ -80,7 +80,7 @@ class AccountService(
             "instagram-id" -> account.instagramId = toString(request.value)
             "twitter-id" -> account.twitterId = toString(request.value)
             "youtube-id" -> account.youtubeId = toString(request.value)
-            "wallet-id" -> account.walletId = toLong(request.value)
+            "business-id" -> account.businessId = toLong(request.value)
             "store-id" -> account.storeId = toLong(request.value)
             else -> throw BadRequestException(
                 error = Error(
@@ -189,7 +189,7 @@ class AccountService(
         phone = phoneService.toPhone(account.phone),
         category = account.category?.let { categoryService.toCategory(it, language) } ?: Category(),
         city = placeService.toPlace(account.city, language),
-        walletId = account.walletId,
+        walletId = account.businessId,
         storeId = account.storeId
     )
 
@@ -206,7 +206,7 @@ class AccountService(
         updated = account.updated.toInstant().atOffset(ZoneOffset.UTC),
         category = account.category?.let { categoryService.toCategorySummary(it, language) } ?: CategorySummary(),
         city = placeService.toPlaceSummary(account.city, language),
-        walletId = account.walletId,
+        walletId = account.businessId,
         storeId = account.storeId
     )
 

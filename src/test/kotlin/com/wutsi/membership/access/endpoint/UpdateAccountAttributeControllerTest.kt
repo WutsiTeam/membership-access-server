@@ -193,10 +193,10 @@ class UpdateAccountAttributeControllerTest {
     }
 
     @Test
-    fun `set wallet-id`() {
+    fun `set business-id`() {
         val value = "111"
-        val account = testAttibute("wallet-id", value)
-        assertEquals(value.toLong(), account.walletId)
+        val account = testAttibute("business-id", value)
+        assertEquals(value.toLong(), account.businessId)
     }
 
     private fun testAttibute(name: String, value: String?): AccountEntity {
