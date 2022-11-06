@@ -8,6 +8,7 @@ import org.springframework.boot.test.web.server.LocalServerPort
 import org.springframework.test.context.jdbc.Sql
 import org.springframework.web.client.RestTemplate
 import kotlin.test.assertFalse
+import kotlin.test.assertNull
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Sql(value = ["/db/clean.sql", "/db/DisableBusinessController.sql"])
@@ -28,6 +29,8 @@ class DisableBusinessControllerTest {
         // THEN
         val account = dao.findById(100).get()
         assertFalse(account.business)
+        assertNull(account.businessId)
+        assertNull(account.storeId)
     }
 
     private fun url(id: Long) = "http://localhost:$port/v1/accounts/$id/business"

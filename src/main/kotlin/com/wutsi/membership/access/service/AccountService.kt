@@ -125,12 +125,16 @@ class AccountService(
 
     fun disableBusiness(id: Long): AccountEntity {
         val account = findById(id)
+        return disableBusiness(account)
+    }
 
+    private fun disableBusiness(account: AccountEntity): AccountEntity {
         if (account.business) {
             account.business = false
+            account.businessId = null
+            account.storeId = null
             dao.save(account)
         }
-
         return account
     }
 
@@ -282,6 +286,7 @@ class AccountService(
     private fun suspend(account: AccountEntity) {
         account.status = AccountStatus.SUSPENDED
         account.suspended = Date()
+        disableBusiness(account)
     }
 
     private fun normalizePhoneNumber(phoneNumber: String?): String? {

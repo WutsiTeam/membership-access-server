@@ -9,8 +9,8 @@ INSERT INTO T_PHONE(id, number, country)
         (101, '+237221234101', 'CM')
 ;
 
-INSERT INTO T_ACCOUNT(id, phone_fk, city_fk, business, display_name, picture_url, status, country, language)
+INSERT INTO T_ACCOUNT(id, phone_fk, city_fk, business_id, store_id, business, display_name, picture_url, status, country, language)
     VALUES
-        (100, 100, 100, true, 'Ray Sponsible', 'https://me.com/12343/picture.png', 1, 'CM', 'fr'),
-        (199, 101, 100, true, 'Deleted', null, 2, 'CM', 'fr')
+        (100, 100, 100, true, 11, 22, 'Ray Sponsible', 'https://me.com/12343/picture.png', 1, 'CM', 'fr'),
+        (199, 101, 100, true, 33, 44, 'Deleted', null, 2, 'CM', 'fr')
 ;

@@ -50,6 +50,9 @@ class UpdateAccountStatusControllerTest {
         val account = dao.findById(100).get()
         assertEquals(AccountStatus.SUSPENDED, account.status)
         assertNotNull(account.suspended)
+        account.business = false
+        account.businessId = null
+        account.storeId = null
     }
 
     private fun url(id: Long) = "http://localhost:$port/v1/accounts/$id/status"
