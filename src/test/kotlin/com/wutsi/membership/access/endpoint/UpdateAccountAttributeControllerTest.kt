@@ -95,13 +95,6 @@ class UpdateAccountAttributeControllerTest {
     }
 
     @Test
-    fun `set country`() {
-        val value = "GB"
-        val account = testAttibute("country", value)
-        assertEquals(value, account.country)
-    }
-
-    @Test
     fun `set website`() {
         val value = "https://www.ff.com"
         val account = testAttibute("website", value)
@@ -140,7 +133,7 @@ class UpdateAccountAttributeControllerTest {
     fun `set city-id`() {
         val value = "200"
         val account = testAttibute("city-id", value)
-        assertEquals(value.toLong(), account.city.id)
+        assertEquals(value.toLong(), account.city?.id)
     }
 
     @Test

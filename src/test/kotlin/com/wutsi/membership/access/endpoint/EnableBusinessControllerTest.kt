@@ -41,7 +41,7 @@ class EnableBusinessControllerTest {
         assertTrue(account.business)
         assertEquals(request.displayName, account.displayName)
         assertEquals(request.categoryId, account.category?.id)
-        assertEquals(request.cityId, account.city.id)
+        assertEquals(request.cityId, account.city?.id)
         assertEquals(request.biography, account.biography)
         assertEquals(request.whatsapp, account.whatsapp)
         assertEquals(request.country, account.country)

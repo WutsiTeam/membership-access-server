@@ -3,8 +3,6 @@ package com.wutsi.membership.access.service
 import com.wutsi.membership.access.dao.AccountRepository
 import com.wutsi.membership.access.dto.Account
 import com.wutsi.membership.access.dto.AccountSummary
-import com.wutsi.membership.access.dto.Category
-import com.wutsi.membership.access.dto.CategorySummary
 import com.wutsi.membership.access.dto.CreateAccountRequest
 import com.wutsi.membership.access.dto.EnableBusinessRequest
 import com.wutsi.membership.access.dto.SearchAccountRequest
@@ -45,7 +43,7 @@ class AccountService(
         ensureNotAssigned(phone)
 
         // Account
-        val city = placeService.findById(request.cityId)
+        val city = request.cityId?.let { placeService.findById(it) }
         return dao.save(
             AccountEntity(
                 phone = phone,
@@ -55,7 +53,7 @@ class AccountService(
                 language = request.language,
                 pictureUrl = request.pictureUrl,
                 status = AccountStatus.ACTIVE,
-                timezoneId = city.timezoneId
+                timezoneId = city?.timezoneId
             )
         )
     }
@@ -67,7 +65,6 @@ class AccountService(
             "display-name" -> account.displayName = toString(request.value)!!
             "picture-url" -> account.pictureUrl = toString(request.value)
             "language" -> account.language = request.value ?: DEFAULT_LANGUAGE
-            "country" -> account.country = request.value ?: DEFAULT_COUNTRY
             "biography" -> account.biography = toString(request.value)
             "website" -> account.website = toString(request.value)
             "category-id" -> account.category = toLong(request.value)?.let { categoryService.findById(it) }
@@ -191,8 +188,8 @@ class AccountService(
         created = account.created.toInstant().atOffset(ZoneOffset.UTC),
         updated = account.updated.toInstant().atOffset(ZoneOffset.UTC),
         phone = phoneService.toPhone(account.phone),
-        category = account.category?.let { categoryService.toCategory(it, language) } ?: Category(),
-        city = placeService.toPlace(account.city, language),
+        category = account.category?.let { categoryService.toCategory(it, language) },
+        city = account.city?.let { placeService.toPlace(it, language) },
         walletId = account.businessId,
         storeId = account.storeId
     )
@@ -208,8 +205,8 @@ class AccountService(
         superUser = account.superUser,
         created = account.created.toInstant().atOffset(ZoneOffset.UTC),
         updated = account.updated.toInstant().atOffset(ZoneOffset.UTC),
-        category = account.category?.let { categoryService.toCategorySummary(it, language) } ?: CategorySummary(),
-        city = placeService.toPlaceSummary(account.city, language),
+        categoryId = account.category?.id,
+        cityId = account.city?.id,
         walletId = account.businessId,
         storeId = account.storeId
     )

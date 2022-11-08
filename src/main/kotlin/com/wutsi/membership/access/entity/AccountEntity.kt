@@ -24,7 +24,7 @@ data class AccountEntity(
 
     @OneToOne
     @JoinColumn(name = "city_fk")
-    var city: PlaceEntity = PlaceEntity(),
+    var city: PlaceEntity? = null,
 
     @OneToOne
     @JoinColumn(name = "category_fk")

@@ -18,5 +18,5 @@ public data class CreateAccountRequest(
     @get:Size(max = 50)
     public val displayName: String = "",
     public val pictureUrl: String? = null,
-    public val cityId: Long = 0
+    public val cityId: Long? = null
 )

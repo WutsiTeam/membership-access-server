@@ -44,16 +44,16 @@ class GetAccountControllerTest {
         assertEquals("CM", account.phone.country)
         assertNotNull(account.phone.created)
 
-        assertEquals(100, account.city.id)
-        assertEquals("Yaounde", account.city.name)
-        assertEquals("Yaounde, Cameroon", account.city.longName)
-        assertEquals("CM", account.city.country)
-        assertEquals("Africa/Douala", account.city.timezoneId)
-        assertEquals(PlaceType.CITY.name, account.city.type)
+        assertEquals(100, account.city?.id)
+        assertEquals("Yaounde", account.city?.name)
+        assertEquals("Yaounde, Cameroon", account.city?.longName)
+        assertEquals("CM", account.city?.country)
+        assertEquals("Africa/Douala", account.city?.timezoneId)
+        assertEquals(PlaceType.CITY.name, account.city?.type)
 
         assertNotNull(account.category)
-        assertEquals(1000, account.category.id)
-        assertEquals("Advertising/Marketing", account.category.title)
+        assertEquals(1000, account.category?.id)
+        assertEquals("Advertising/Marketing", account.category?.title)
     }
 
     @Test
