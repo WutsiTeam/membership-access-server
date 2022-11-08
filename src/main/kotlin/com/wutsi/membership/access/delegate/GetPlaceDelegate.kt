@@ -14,8 +14,6 @@ public class GetPlaceDelegate(
 ) {
     public fun invoke(id: Long): GetPlaceResponse {
         val language = request.getHeader("Accept-Language")
-        logger.add("language", language)
-
         val place = service.findById(id)
         return GetPlaceResponse(
             place = service.toPlace(place, language)

@@ -14,8 +14,6 @@ public class GetAccountDelegate(
 ) {
     public fun invoke(id: Long): GetAccountResponse {
         val language = request.getHeader("Accept-Language")
-        logger.add("language", language)
-
         val account = service.findById(id, true)
         return GetAccountResponse(
             account = service.toAccount(account, language)

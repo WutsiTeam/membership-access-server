@@ -16,8 +16,6 @@ public class SaveCategoryDelegate(
         logger.add("request_title", request.title)
 
         val language = httpRequest.getHeader("Accept-Language")
-        logger.add("language", language)
-
         service.save(id, request, language)
     }
 }

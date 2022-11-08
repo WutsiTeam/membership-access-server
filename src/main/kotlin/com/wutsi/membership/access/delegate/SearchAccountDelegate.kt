@@ -22,8 +22,6 @@ public class SearchAccountDelegate(
         logger.add("request_offset", request.offset)
 
         val language = httpRequest.getHeader("Accept-Language")
-        logger.add("language", language)
-
         val accounts = service.search(request)
         logger.add("count", accounts.size)
         return SearchAccountResponse(

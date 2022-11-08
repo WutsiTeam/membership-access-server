@@ -18,8 +18,6 @@ class SearchCategoryDelegate(
         logger.add("request_offset", request.offset)
 
         val language = httpRequest.getHeader("Accept-Language")
-        logger.add("language", language)
-
         val categories = service.search(request, language)
         logger.add("count", categories.size)
 

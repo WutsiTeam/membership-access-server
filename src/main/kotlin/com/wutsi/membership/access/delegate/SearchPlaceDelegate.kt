@@ -21,8 +21,6 @@ class SearchPlaceDelegate(
         logger.add("request_offset", request.offset)
 
         val language = httpRequest.getHeader("Accept-Language")
-        logger.add("language", language)
-
         val places = service.search(request)
         logger.add("count", places.size)
 
