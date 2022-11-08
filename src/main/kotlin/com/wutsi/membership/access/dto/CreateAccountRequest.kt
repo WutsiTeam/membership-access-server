@@ -1,6 +1,5 @@
 package com.wutsi.membership.access.dto
 
-import javax.validation.constraints.Min
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.Size
 import kotlin.Long
@@ -19,6 +18,5 @@ public data class CreateAccountRequest(
     @get:Size(max = 50)
     public val displayName: String = "",
     public val pictureUrl: String? = null,
-    @get:Min(1)
     public val cityId: Long = 0
 )

@@ -12,10 +12,7 @@ public class SavePlaceController(
     public val `delegate`: SavePlaceDelegate
 ) {
     @PostMapping("/v1/places")
-    public fun invoke(
-        @Valid @RequestBody
-        request: SavePlaceRequest
-    ) {
+    public fun invoke(@Valid @RequestBody request: SavePlaceRequest) {
         delegate.invoke(request)
     }
 }

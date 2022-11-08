@@ -13,9 +13,6 @@ public class SearchPlaceController(
     public val `delegate`: SearchPlaceDelegate
 ) {
     @PostMapping("/v1/places/search")
-    public fun invoke(
-        @Valid @RequestBody
-        request: SearchPlaceRequest
-    ): SearchPlaceResponse =
+    public fun invoke(@Valid @RequestBody request: SearchPlaceRequest): SearchPlaceResponse =
         delegate.invoke(request)
 }

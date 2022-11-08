@@ -13,9 +13,6 @@ public class CreateAccountController(
     public val `delegate`: CreateAccountDelegate
 ) {
     @PostMapping("/v1/accounts")
-    public fun invoke(
-        @Valid @RequestBody
-        request: CreateAccountRequest
-    ): CreateAccountResponse =
+    public fun invoke(@Valid @RequestBody request: CreateAccountRequest): CreateAccountResponse =
         delegate.invoke(request)
 }
