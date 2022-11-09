@@ -34,6 +34,8 @@ class GetAccountControllerTest {
         assertEquals("fr", account.language)
         assertEquals("ray.sponsible@gmail.com", account.email)
         assertEquals("GB", account.country)
+        assertEquals(10000L, account.businessId)
+        assertEquals(10001L, account.storeId)
         assertTrue(account.superUser)
         assertTrue(account.business)
         assertNotNull(account.created)

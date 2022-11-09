@@ -190,7 +190,7 @@ class AccountService(
         phone = phoneService.toPhone(account.phone),
         category = account.category?.let { categoryService.toCategory(it, language) },
         city = account.city?.let { placeService.toPlace(it, language) },
-        walletId = account.businessId,
+        businessId = account.businessId,
         storeId = account.storeId
     )
 
@@ -207,7 +207,7 @@ class AccountService(
         updated = account.updated.toInstant().atOffset(ZoneOffset.UTC),
         categoryId = account.category?.id,
         cityId = account.city?.id,
-        walletId = account.businessId,
+        businessId = account.businessId,
         storeId = account.storeId
     )
 
