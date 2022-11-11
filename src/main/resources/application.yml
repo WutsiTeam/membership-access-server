@@ -63,6 +63,9 @@ wutsi:
   application:
     name: membership-access
   platform:
+    cache:
+      name: ${wutsi.application.name}
+      type: local
     security:
       type: none
     tracing:
