@@ -12,7 +12,10 @@ public data class CreateAccountRequest(
     @get:Size(max = 2)
     public val language: String = "",
     @get:NotBlank
-    @get:Size(max = 2)
+    @get:Size(
+        min = 2,
+        max = 2
+    )
     public val country: String = "",
     @get:NotBlank
     @get:Size(max = 50)
