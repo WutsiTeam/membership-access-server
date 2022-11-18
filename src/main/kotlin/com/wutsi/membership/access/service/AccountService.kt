@@ -73,7 +73,7 @@ class AccountService(
             "biography" -> account.biography = toString(request.value)
             "website" -> account.website = toString(request.value)
             "category-id" -> account.category = toLong(request.value)?.let { categoryService.findById(it) }
-            "whatsapp" -> account.whatsapp = toString(request.value)
+            "whatsapp" -> account.whatsapp = toBoolean(request.value) ?: false
             "street" -> account.street = toString(request.value)
             "city-id" -> account.city = toLong(request.value)!!.let { placeService.findById(it) }
             "timezone-id" -> account.timezoneId = toString(request.value)
@@ -327,4 +327,7 @@ class AccountService(
 
     private fun toLong(value: String?): Long? =
         toString(value)?.toLong()
+
+    private fun toBoolean(value: String?): Boolean? =
+        toString(value)?.toBoolean()
 }

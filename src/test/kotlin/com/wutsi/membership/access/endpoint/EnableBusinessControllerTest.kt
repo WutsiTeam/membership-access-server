@@ -30,7 +30,7 @@ class EnableBusinessControllerTest {
             categoryId = 1001L,
             cityId = 200,
             biography = "This is the biography",
-            whatsapp = "+5147580000",
+            whatsapp = true,
             street = "3030 linton",
             country = "GB"
         )

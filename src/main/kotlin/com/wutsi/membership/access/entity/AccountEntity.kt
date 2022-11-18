@@ -43,7 +43,7 @@ data class AccountEntity(
     var business: Boolean = false,
     var website: String? = null,
     var biography: String? = null,
-    var whatsapp: String? = null,
+    var whatsapp: Boolean = false,
     var street: String? = null,
     var timezoneId: String? = null,
     var email: String? = null,

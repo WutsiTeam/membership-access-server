@@ -117,9 +117,9 @@ class UpdateAccountAttributeControllerTest {
 
     @Test
     fun `set whatstapp`() {
-        val value = "+15147580101"
+        val value = "true"
         val account = testAttibute("whatsapp", value)
-        assertEquals(value, account.whatsapp)
+        assertEquals(value.toBoolean(), account.whatsapp)
     }
 
     @Test

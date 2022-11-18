@@ -24,7 +24,7 @@ public data class Account(
     public val business: Boolean = false,
     public val biography: String? = null,
     public val website: String? = null,
-    public val whatsapp: String? = null,
+    public val whatsapp: Boolean = false,
     public val street: String? = null,
     public val timezoneId: String? = null,
     public val facebookId: String? = null,
