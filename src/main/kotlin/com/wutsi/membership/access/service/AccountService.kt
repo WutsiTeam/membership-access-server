@@ -53,9 +53,14 @@ class AccountService(
                 language = request.language,
                 pictureUrl = request.pictureUrl,
                 status = AccountStatus.ACTIVE,
-                timezoneId = city?.timezoneId
+                timezoneId = city?.timezoneId ?: getTimezoneByCountry(request.country)
             )
         )
+    }
+
+    fun getTimezoneByCountry(country: String): String? {
+        val tzs = com.ibm.icu.util.TimeZone.getAvailableIDs(country)
+        return if (tzs.isNotEmpty()) tzs[0] else null
     }
 
     fun update(id: Long, request: UpdateAccountAttributeRequest): AccountEntity {

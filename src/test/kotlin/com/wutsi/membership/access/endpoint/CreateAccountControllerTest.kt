@@ -69,6 +69,27 @@ class CreateAccountControllerTest {
     }
 
     @Test
+    fun createWithNoCity() {
+        // WHEN
+        val request = CreateAccountRequest(
+            phoneNumber = "+23774511111",
+            language = "fr",
+            country = "CM",
+            displayName = "Ray Sponsible",
+            pictureUrl = "https://www.google.ca/img/1.ong",
+            cityId = null
+        )
+        val response = rest.postForEntity(url(), request, CreateAccountResponse::class.java)
+
+        // THEN
+        assertEquals(HttpStatus.OK, response.statusCode)
+
+        val account = dao.findById(response.body!!.accountId).get()
+
+        assertEquals("Africa/Douala", account.timezoneId)
+    }
+
+    @Test
     fun `create account with existing phone number`() {
         // WHEN
         val request = CreateAccountRequest(
