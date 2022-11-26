@@ -1,8 +1,8 @@
 package com.wutsi.membership.access.dao
 
+import com.wutsi.enums.AccountStatus
 import com.wutsi.membership.access.entity.AccountEntity
 import com.wutsi.membership.access.entity.PhoneEntity
-import com.wutsi.membership.access.enums.AccountStatus
 import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 import java.util.Optional

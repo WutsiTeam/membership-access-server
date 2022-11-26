@@ -1,8 +1,8 @@
 package com.wutsi.membership.access.endpoint
 
+import com.wutsi.enums.AccountStatus
 import com.wutsi.membership.access.dto.SearchAccountRequest
 import com.wutsi.membership.access.dto.SearchAccountResponse
-import com.wutsi.membership.access.enums.AccountStatus
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest

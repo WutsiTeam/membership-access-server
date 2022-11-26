@@ -1,6 +1,6 @@
 package com.wutsi.membership.access.entity
 
-import com.wutsi.membership.access.enums.AccountStatus
+import com.wutsi.enums.AccountStatus
 import java.util.Date
 import javax.persistence.Entity
 import javax.persistence.Enumerated

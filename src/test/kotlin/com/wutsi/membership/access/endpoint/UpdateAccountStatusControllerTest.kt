@@ -1,8 +1,8 @@
 package com.wutsi.membership.access.endpoint
 
+import com.wutsi.enums.AccountStatus
 import com.wutsi.membership.access.dao.AccountRepository
 import com.wutsi.membership.access.dto.UpdateAccountStatusRequest
-import com.wutsi.membership.access.enums.AccountStatus
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest

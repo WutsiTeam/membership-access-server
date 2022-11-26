@@ -1,8 +1,8 @@
 package com.wutsi.membership.access.endpoint
 
+import com.wutsi.enums.PlaceType
 import com.wutsi.membership.access.dao.PlaceRepository
 import com.wutsi.membership.access.dto.SavePlaceRequest
-import com.wutsi.membership.access.enums.PlaceType
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest

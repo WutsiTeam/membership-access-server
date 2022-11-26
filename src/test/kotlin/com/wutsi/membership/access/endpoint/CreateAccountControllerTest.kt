@@ -1,11 +1,11 @@
 package com.wutsi.membership.access.endpoint
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.wutsi.enums.AccountStatus
 import com.wutsi.membership.access.dao.AccountRepository
 import com.wutsi.membership.access.dao.PhoneRepository
 import com.wutsi.membership.access.dto.CreateAccountRequest
 import com.wutsi.membership.access.dto.CreateAccountResponse
-import com.wutsi.membership.access.enums.AccountStatus
 import com.wutsi.membership.access.error.ErrorURN
 import com.wutsi.platform.core.error.ErrorResponse
 import org.junit.jupiter.api.Test

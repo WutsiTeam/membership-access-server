@@ -1,5 +1,6 @@
 package com.wutsi.membership.access.service
 
+import com.wutsi.enums.AccountStatus
 import com.wutsi.membership.access.dao.AccountRepository
 import com.wutsi.membership.access.dto.Account
 import com.wutsi.membership.access.dto.AccountSummary
@@ -10,7 +11,6 @@ import com.wutsi.membership.access.dto.UpdateAccountAttributeRequest
 import com.wutsi.membership.access.dto.UpdateAccountStatusRequest
 import com.wutsi.membership.access.entity.AccountEntity
 import com.wutsi.membership.access.entity.PhoneEntity
-import com.wutsi.membership.access.enums.AccountStatus
 import com.wutsi.membership.access.error.ErrorURN
 import com.wutsi.platform.core.error.Error
 import com.wutsi.platform.core.error.Parameter

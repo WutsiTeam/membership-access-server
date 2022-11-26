@@ -1,6 +1,6 @@
 package com.wutsi.membership.access.entity
 
-import com.wutsi.membership.access.enums.PlaceType
+import com.wutsi.enums.PlaceType
 import java.util.Date
 import javax.persistence.Entity
 import javax.persistence.Id

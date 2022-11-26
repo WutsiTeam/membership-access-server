@@ -36,6 +36,7 @@
     <mysql.version>8.0.31</mysql.version>
     <flyway.version>9.3.0</flyway.version>
     <wutsi-platform-core.version>0.0.190</wutsi-platform-core.version>
+    <wutsi-enums.version>1.0.3</wutsi-enums.version>
   </properties>
 
   <dependencies>
@@ -44,6 +45,12 @@
       <artifactId>wutsi-platform-core</artifactId>
       <version>${wutsi-platform-core.version}</version>
     </dependency>
+    <dependency>
+      <groupId>com.wutsi</groupId>
+      <artifactId>wutsi-enums</artifactId>
+      <version>${wutsi-enums.version}</version>
+    </dependency>
+
     <dependency>
       <groupId>com.googlecode.libphonenumber</groupId>
       <artifactId>libphonenumber</artifactId>

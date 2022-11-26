@@ -1,8 +1,8 @@
 package com.wutsi.membership.access.endpoint
 
+import com.wutsi.enums.PlaceType
 import com.wutsi.membership.access.dto.SearchPlaceRequest
 import com.wutsi.membership.access.dto.SearchPlaceResponse
-import com.wutsi.membership.access.enums.PlaceType
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.server.LocalServerPort

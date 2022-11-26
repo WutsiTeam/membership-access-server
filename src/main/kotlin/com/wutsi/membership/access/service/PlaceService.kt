@@ -1,12 +1,12 @@
 package com.wutsi.membership.access.service
 
+import com.wutsi.enums.PlaceType
 import com.wutsi.membership.access.dao.PlaceRepository
 import com.wutsi.membership.access.dto.Place
 import com.wutsi.membership.access.dto.PlaceSummary
 import com.wutsi.membership.access.dto.SavePlaceRequest
 import com.wutsi.membership.access.dto.SearchPlaceRequest
 import com.wutsi.membership.access.entity.PlaceEntity
-import com.wutsi.membership.access.enums.PlaceType
 import com.wutsi.membership.access.error.ErrorURN
 import com.wutsi.membership.access.util.StringUtil
 import com.wutsi.platform.core.error.Error
