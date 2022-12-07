@@ -35,21 +35,21 @@ class UpdateAccountStatusControllerTest {
 
         val account = dao.findById(199).get()
         assertEquals(AccountStatus.ACTIVE, account.status)
-        assertNull(account.suspended)
+        assertNull(account.deactivated)
     }
 
     @Test
     fun suspend() {
         val request = UpdateAccountStatusRequest(
-            status = AccountStatus.SUSPENDED.name
+            status = AccountStatus.INACTIVE.name
         )
         val response = rest.postForEntity(url(100), request, Any::class.java)
 
         assertEquals(200, response.statusCodeValue)
 
         val account = dao.findById(100).get()
-        assertEquals(AccountStatus.SUSPENDED, account.status)
-        assertNotNull(account.suspended)
+        assertEquals(AccountStatus.INACTIVE, account.status)
+        assertNotNull(account.deactivated)
         account.business = false
         account.businessId = null
         account.storeId = null

@@ -51,7 +51,7 @@ data class AccountEntity(
     var instagramId: String? = null,
     var twitterId: String? = null,
     var youtubeId: String? = null,
-    var suspended: Date? = null,
+    var deactivated: Date? = null,
     var storeId: Long? = null,
     var businessId: Long? = null
 )

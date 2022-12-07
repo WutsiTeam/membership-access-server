@@ -47,7 +47,6 @@ class SearchAccountControllerTest {
         assertEquals("ACTIVE", account.status)
         assertEquals("fr", account.language)
         assertNotNull(account.created)
-        assertNotNull(account.updated)
         assertTrue(account.superUser)
     }
 
@@ -70,7 +69,6 @@ class SearchAccountControllerTest {
         assertEquals("ACTIVE", account.status)
         assertEquals("fr", account.language)
         assertNotNull(account.created)
-        assertNotNull(account.updated)
         assertTrue(account.superUser)
     }
 
@@ -78,7 +76,7 @@ class SearchAccountControllerTest {
     fun `search by phone and status`() {
         val request = SearchAccountRequest(
             phoneNumber = "+237221234113",
-            status = AccountStatus.SUSPENDED.name
+            status = AccountStatus.INACTIVE.name
         )
         val response = rest.postForEntity(url, request, SearchAccountResponse::class.java)
 

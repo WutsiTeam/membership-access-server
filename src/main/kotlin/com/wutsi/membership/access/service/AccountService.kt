@@ -103,7 +103,7 @@ class AccountService(
         val account = findById(id, true)
         when (request.status.uppercase()) {
             AccountStatus.ACTIVE.name -> activate(account)
-            AccountStatus.SUSPENDED.name -> suspend(account)
+            AccountStatus.INACTIVE.name -> suspend(account)
             else -> return null
         }
         return dao.save(account)
@@ -155,7 +155,7 @@ class AccountService(
                 )
             }
 
-        if (account.status == AccountStatus.SUSPENDED && !acceptSuspended) {
+        if (account.status == AccountStatus.INACTIVE && !acceptSuspended) {
             throw NotFoundException(
                 error = Error(
                     code = ErrorURN.ACCOUNT_SUSPENDED.urn,
@@ -189,7 +189,7 @@ class AccountService(
         website = account.website,
         business = account.business,
         superUser = account.superUser,
-        suspended = account.suspended?.toInstant()?.atOffset(ZoneOffset.UTC),
+        deactivated = account.deactivated?.toInstant()?.atOffset(ZoneOffset.UTC),
         created = account.created.toInstant().atOffset(ZoneOffset.UTC),
         updated = account.updated.toInstant().atOffset(ZoneOffset.UTC),
         phone = phoneService.toPhone(account.phone),
@@ -209,7 +209,6 @@ class AccountService(
         business = account.business,
         superUser = account.superUser,
         created = account.created.toInstant().atOffset(ZoneOffset.UTC),
-        updated = account.updated.toInstant().atOffset(ZoneOffset.UTC),
         categoryId = account.category?.id,
         cityId = account.city?.id,
         businessId = account.businessId,
@@ -282,12 +281,12 @@ class AccountService(
 
     private fun activate(account: AccountEntity) {
         account.status = AccountStatus.ACTIVE
-        account.suspended = null
+        account.deactivated = null
     }
 
     private fun suspend(account: AccountEntity) {
-        account.status = AccountStatus.SUSPENDED
-        account.suspended = Date()
+        account.status = AccountStatus.INACTIVE
+        account.deactivated = Date()
         disableBusiness(account)
     }
 

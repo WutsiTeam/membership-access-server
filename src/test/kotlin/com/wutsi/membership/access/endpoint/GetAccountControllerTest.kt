@@ -1,5 +1,6 @@
 package com.wutsi.membership.access.endpoint
 
+import com.wutsi.enums.AccountStatus
 import com.wutsi.enums.PlaceType
 import com.wutsi.membership.access.dto.GetAccountResponse
 import org.junit.jupiter.api.Test
@@ -30,7 +31,7 @@ class GetAccountControllerTest {
         assertEquals(100, account.id)
         assertEquals("Ray Sponsible", account.displayName)
         assertEquals("https://me.com/12343/picture.png", account.pictureUrl)
-        assertEquals("ACTIVE", account.status)
+        assertEquals(AccountStatus.ACTIVE.name, account.status)
         assertEquals("fr", account.language)
         assertEquals("ray.sponsible@gmail.com", account.email)
         assertEquals("GB", account.country)
@@ -40,7 +41,7 @@ class GetAccountControllerTest {
         assertTrue(account.business)
         assertNotNull(account.created)
         assertNotNull(account.updated)
-        assertNull(account.suspended)
+        assertNull(account.deactivated)
 
         assertEquals("+237221234100", account.phone.number)
         assertEquals("CM", account.phone.country)
@@ -65,8 +66,8 @@ class GetAccountControllerTest {
         assertEquals(200, response.statusCodeValue)
 
         val account = response.body!!.account
-        assertEquals("SUSPENDED", account.status)
-        assertNotNull(account.suspended)
+        assertEquals(AccountStatus.INACTIVE.name, account.status)
+        assertNotNull(account.deactivated)
     }
 
     private fun url(id: Long) = "http://localhost:$port/v1/accounts/$id"
