@@ -27,7 +27,7 @@ class UpdateAccountStatusControllerTest {
     @Test
     fun activate() {
         val request = UpdateAccountStatusRequest(
-            status = AccountStatus.ACTIVE.name
+            status = AccountStatus.ACTIVE.name,
         )
         val response = rest.postForEntity(url(199), request, Any::class.java)
 
@@ -41,7 +41,7 @@ class UpdateAccountStatusControllerTest {
     @Test
     fun suspend() {
         val request = UpdateAccountStatusRequest(
-            status = AccountStatus.INACTIVE.name
+            status = AccountStatus.INACTIVE.name,
         )
         val response = rest.postForEntity(url(100), request, Any::class.java)
 

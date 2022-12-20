@@ -8,7 +8,7 @@ import kotlin.Long
 
 @RestController
 public class DisableBusinessController(
-    public val `delegate`: DisableBusinessDelegate
+    public val `delegate`: DisableBusinessDelegate,
 ) {
     @DeleteMapping("/v1/accounts/{id}/business")
     public fun invoke(@PathVariable(name = "id") id: Long) {

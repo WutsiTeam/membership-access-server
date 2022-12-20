@@ -5,5 +5,5 @@ import kotlin.String
 
 public data class SaveCategoryRequest(
     @get:NotBlank
-    public val title: String = ""
+    public val title: String = "",
 )

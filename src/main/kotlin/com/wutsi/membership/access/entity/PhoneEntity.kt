@@ -15,5 +15,5 @@ data class PhoneEntity(
     val id: Long? = null,
     val number: String = "",
     val country: String = "",
-    val created: Date = Date()
+    val created: Date = Date(),
 )

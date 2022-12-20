@@ -10,13 +10,13 @@ import javax.servlet.http.HttpServletRequest
 public class GetAccountDelegate(
     private val service: AccountService,
     private val request: HttpServletRequest,
-    private val logger: KVLogger
+    private val logger: KVLogger,
 ) {
     public fun invoke(id: Long): GetAccountResponse {
         val language = request.getHeader("Accept-Language")
         val account = service.findById(id, true)
         return GetAccountResponse(
-            account = service.toAccount(account, language)
+            account = service.toAccount(account, language),
         )
     }
 }

@@ -14,5 +14,5 @@ public data class SearchAccountRequest(
     public val store: Boolean? = null,
     public val cityId: Long? = null,
     public val limit: Int = 100,
-    public val offset: Int = 0
+    public val offset: Int = 0,
 )

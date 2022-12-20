@@ -9,5 +9,5 @@ public data class SaveAccountDeviceRequest(
     public val type: String? = null,
     public val osName: String? = null,
     public val osVersion: String? = null,
-    public val model: String? = null
+    public val model: String? = null,
 )

@@ -29,7 +29,7 @@ class SearchCategoryControllerTest : AbstractLanguageAwareControllerTest() {
     @Test
     fun byCategoryIds() {
         val request = SearchCategoryRequest(
-            categoryIds = listOf(1001, 1002, 1003)
+            categoryIds = listOf(1001, 1002, 1003),
         )
         val response = rest.postForEntity(url(), request, SearchCategoryResponse::class.java)
 
@@ -42,7 +42,7 @@ class SearchCategoryControllerTest : AbstractLanguageAwareControllerTest() {
     @Test
     fun byKeyword() {
         val request = SearchCategoryRequest(
-            keyword = "A"
+            keyword = "A",
         )
         val response = rest.postForEntity(url(), request, SearchCategoryResponse::class.java)
 
@@ -57,7 +57,7 @@ class SearchCategoryControllerTest : AbstractLanguageAwareControllerTest() {
     fun byKeywordFrench() {
         language = "fr"
         val request = SearchCategoryRequest(
-            keyword = "So"
+            keyword = "So",
         )
         val response = rest.postForEntity(url(), request, SearchCategoryResponse::class.java)
 

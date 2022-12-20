@@ -17,5 +17,5 @@ data class DeviceEntity(
     var osName: String? = null,
     var osVersion: String? = null,
     val created: Date = Date(),
-    var updated: Date = Date()
+    var updated: Date = Date(),
 )

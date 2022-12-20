@@ -32,7 +32,7 @@ class EnableBusinessControllerTest {
             biography = "This is the biography",
             whatsapp = true,
             street = "3030 linton",
-            country = "GB"
+            country = "GB",
         )
         rest.postForEntity(url(100), request, Any::class.java)
 

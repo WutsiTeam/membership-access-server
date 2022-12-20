@@ -19,7 +19,7 @@ import javax.persistence.Query
 @Service
 class CategoryService(
     private val dao: CategoryRepository,
-    private val em: EntityManager
+    private val em: EntityManager,
 ) {
     fun findById(id: Long): CategoryEntity =
         dao.findById(id).orElseThrow {
@@ -29,9 +29,9 @@ class CategoryService(
                     parameter = Parameter(
                         name = "id",
                         value = id,
-                        type = ParameterType.PARAMETER_TYPE_PATH
-                    )
-                )
+                        type = ParameterType.PARAMETER_TYPE_PATH,
+                    ),
+                ),
             )
         }
 
@@ -57,12 +57,12 @@ class CategoryService(
 
     fun toCategory(category: CategoryEntity, language: String?) = Category(
         id = category.id,
-        title = getTitle(category, language)
+        title = getTitle(category, language),
     )
 
     fun toCategorySummary(category: CategoryEntity, language: String?) = CategorySummary(
         id = category.id,
-        title = getTitle(category, language)
+        title = getTitle(category, language),
     )
 
     fun search(request: SearchCategoryRequest, language: String?): List<CategoryEntity> {

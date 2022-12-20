@@ -32,7 +32,7 @@ public class SavePlaceControllerTest {
             country = "ci",
             longitude = 1111.0,
             latitude = 2222.0,
-            type = PlaceType.COUNTRY.name
+            type = PlaceType.COUNTRY.name,
         )
         val response = rest.postForEntity(url(), request, Any::class.java)
 
@@ -57,7 +57,7 @@ public class SavePlaceControllerTest {
             country = "CI",
             longitude = 1111.0,
             latitude = 2222.0,
-            type = PlaceType.COUNTRY.name
+            type = PlaceType.COUNTRY.name,
         )
         val response = rest.postForEntity(url(), request, Any::class.java)
 

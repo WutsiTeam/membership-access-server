@@ -1,4 +1,4 @@
-package com.wutsi.membership.access.`delegate`
+package com.wutsi.membership.access.delegate
 
 import com.wutsi.membership.access.dto.SaveCategoryRequest
 import com.wutsi.membership.access.service.CategoryService
@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest
 public class SaveCategoryDelegate(
     private val service: CategoryService,
     private val httpRequest: HttpServletRequest,
-    private val logger: KVLogger
+    private val logger: KVLogger,
 ) {
     public fun invoke(id: Long, request: SaveCategoryRequest) {
         logger.add("request_title", request.title)

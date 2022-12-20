@@ -9,7 +9,7 @@ public class GetAccountDeviceDelegate(private val service: DeviceService) {
     public fun invoke(id: Long): GetAccountDeviceResponse {
         val device = service.findByAccountId(id)
         return GetAccountDeviceResponse(
-            device = service.toDevice(device)
+            device = service.toDevice(device),
         )
     }
 }

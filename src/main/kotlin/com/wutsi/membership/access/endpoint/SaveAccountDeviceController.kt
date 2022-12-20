@@ -11,13 +11,13 @@ import kotlin.Long
 
 @RestController
 public class SaveAccountDeviceController(
-    public val `delegate`: SaveAccountDeviceDelegate
+    public val `delegate`: SaveAccountDeviceDelegate,
 ) {
     @PostMapping("/v1/accounts/{id}/device")
     public fun invoke(
         @PathVariable(name = "id") id: Long,
         @Valid @RequestBody
-        request: SaveAccountDeviceRequest
+        request: SaveAccountDeviceRequest,
     ) {
         delegate.invoke(id, request)
     }

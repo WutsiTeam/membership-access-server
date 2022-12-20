@@ -61,7 +61,7 @@ class UpdateAccountAttributeControllerTest {
     fun `invalid-attribute`() {
         val request = UpdateAccountAttributeRequest(
             name = "______fldkflkd",
-            value = "value"
+            value = "value",
         )
         val ex = assertThrows<HttpStatusCodeException> {
             rest.postForEntity(url(100), request, Any::class.java)
@@ -76,7 +76,7 @@ class UpdateAccountAttributeControllerTest {
     fun `account suspended`() {
         val request = UpdateAccountAttributeRequest(
             name = "display-name",
-            value = "Omam Biyick"
+            value = "Omam Biyick",
         )
         val ex = assertThrows<HttpStatusCodeException> {
             rest.postForEntity(url(199), request, Any::class.java)
@@ -195,7 +195,7 @@ class UpdateAccountAttributeControllerTest {
     private fun testAttibute(name: String, value: String?): AccountEntity {
         val request = UpdateAccountAttributeRequest(
             name = name,
-            value = value
+            value = value,
         )
         val response = rest.postForEntity(url(100), request, Any::class.java)
         assertEquals(200, response.statusCodeValue)

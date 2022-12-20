@@ -14,12 +14,12 @@ public data class CreateAccountRequest(
     @get:NotBlank
     @get:Size(
         min = 2,
-        max = 2
+        max = 2,
     )
     public val country: String = "",
     @get:NotBlank
     @get:Size(max = 50)
     public val displayName: String = "",
     public val pictureUrl: String? = null,
-    public val cityId: Long? = null
+    public val cityId: Long? = null,
 )

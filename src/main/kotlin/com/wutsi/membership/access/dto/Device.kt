@@ -13,5 +13,5 @@ public data class Device(
     @get:DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
     public val created: OffsetDateTime = OffsetDateTime.now(),
     @get:DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
-    public val updated: OffsetDateTime = OffsetDateTime.now()
+    public val updated: OffsetDateTime = OffsetDateTime.now(),
 )

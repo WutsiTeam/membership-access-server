@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest
 public class SearchAccountDelegate(
     private val service: AccountService,
     private val httpRequest: HttpServletRequest,
-    private val logger: KVLogger
+    private val logger: KVLogger,
 ) {
     public fun invoke(request: SearchAccountRequest): SearchAccountResponse {
         logger.add("request_status", request.status)
@@ -25,7 +25,7 @@ public class SearchAccountDelegate(
         val accounts = service.search(request)
         logger.add("count", accounts.size)
         return SearchAccountResponse(
-            accounts = accounts.map { service.toAccountSummary(it, language) }
+            accounts = accounts.map { service.toAccountSummary(it, language) },
         )
     }
 }

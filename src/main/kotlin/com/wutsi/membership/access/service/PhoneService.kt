@@ -18,8 +18,8 @@ class PhoneService(private val dao: PhoneRepository) {
             dao.save(
                 PhoneEntity(
                     number = number,
-                    country = util.getRegionCodeForCountryCode(phone.countryCode)
-                )
+                    country = util.getRegionCodeForCountryCode(phone.countryCode),
+                ),
             )
         }
     }
@@ -28,6 +28,6 @@ class PhoneService(private val dao: PhoneRepository) {
         id = phone.id ?: -1,
         number = phone.number,
         country = phone.country,
-        created = phone.created.toInstant().atOffset(ZoneOffset.UTC)
+        created = phone.created.toInstant().atOffset(ZoneOffset.UTC),
     )
 }

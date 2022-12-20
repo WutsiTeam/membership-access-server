@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest
 class SearchCategoryDelegate(
     private val service: CategoryService,
     private val httpRequest: HttpServletRequest,
-    private val logger: KVLogger
+    private val logger: KVLogger,
 ) {
     fun invoke(request: SearchCategoryRequest): SearchCategoryResponse {
         logger.add("request_limit", request.limit)
@@ -22,7 +22,7 @@ class SearchCategoryDelegate(
         logger.add("count", categories.size)
 
         return SearchCategoryResponse(
-            categories = categories.map { service.toCategorySummary(it, language) }
+            categories = categories.map { service.toCategorySummary(it, language) },
         )
     }
 }

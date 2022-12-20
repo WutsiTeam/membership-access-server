@@ -10,7 +10,7 @@ import javax.transaction.Transactional
 @Service
 public class CreateAccountDelegate(
     private val service: AccountService,
-    private val logger: KVLogger
+    private val logger: KVLogger,
 ) {
     @Transactional
     public fun invoke(request: CreateAccountRequest): CreateAccountResponse {
@@ -25,7 +25,7 @@ public class CreateAccountDelegate(
         logger.add("account_id", account.id)
 
         return CreateAccountResponse(
-            accountId = account.id ?: -1
+            accountId = account.id ?: -1,
         )
     }
 }

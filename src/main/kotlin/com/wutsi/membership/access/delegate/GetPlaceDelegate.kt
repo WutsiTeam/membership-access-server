@@ -10,13 +10,13 @@ import javax.servlet.http.HttpServletRequest
 public class GetPlaceDelegate(
     private val service: PlaceService,
     private val request: HttpServletRequest,
-    private val logger: KVLogger
+    private val logger: KVLogger,
 ) {
     public fun invoke(id: Long): GetPlaceResponse {
         val language = request.getHeader("Accept-Language")
         val place = service.findById(id)
         return GetPlaceResponse(
-            place = service.toPlace(place, language)
+            place = service.toPlace(place, language),
         )
     }
 }

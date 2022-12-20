@@ -22,7 +22,7 @@ import javax.persistence.Query
 @Service
 class PlaceService(
     private val dao: PlaceRepository,
-    private val em: EntityManager
+    private val em: EntityManager,
 ) {
     companion object {
         private val REGEX_UNACCENT = "\\p{InCombiningDiacriticalMarks}+".toRegex()
@@ -36,9 +36,9 @@ class PlaceService(
                     parameter = Parameter(
                         name = "id",
                         value = id,
-                        type = ParameterType.PARAMETER_TYPE_PATH
-                    )
-                )
+                        type = ParameterType.PARAMETER_TYPE_PATH,
+                    ),
+                ),
             )
         }
 
@@ -79,7 +79,7 @@ class PlaceService(
         longitude = place.longitude,
         country = place.country,
         type = place.type.name,
-        timezoneId = place.timezoneId
+        timezoneId = place.timezoneId,
     )
 
     fun toPlaceSummary(place: PlaceEntity, language: String?) = PlaceSummary(
@@ -87,7 +87,7 @@ class PlaceService(
         name = place.name,
         longName = getLongName(place, language),
         country = place.country,
-        type = place.type.name
+        type = place.type.name,
     )
 
     private fun sql(request: SearchPlaceRequest): String {

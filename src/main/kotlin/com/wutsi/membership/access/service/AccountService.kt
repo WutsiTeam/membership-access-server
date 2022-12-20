@@ -30,7 +30,7 @@ class AccountService(
     private val placeService: PlaceService,
     private val phoneService: PhoneService,
     private val categoryService: CategoryService,
-    private val em: EntityManager
+    private val em: EntityManager,
 ) {
     companion object {
         const val DEFAULT_LANGUAGE = "en"
@@ -53,8 +53,8 @@ class AccountService(
                 language = request.language,
                 pictureUrl = request.pictureUrl,
                 status = AccountStatus.ACTIVE,
-                timezoneId = city?.timezoneId ?: getTimezoneByCountry(request.country)
-            )
+                timezoneId = city?.timezoneId ?: getTimezoneByCountry(request.country),
+            ),
         )
     }
 
@@ -90,9 +90,9 @@ class AccountService(
                     parameter = Parameter(
                         name = "name",
                         value = request.name,
-                        type = ParameterType.PARAMETER_TYPE_PAYLOAD
-                    )
-                )
+                        type = ParameterType.PARAMETER_TYPE_PAYLOAD,
+                    ),
+                ),
             )
         }
         dao.save(account)
@@ -149,9 +149,9 @@ class AccountService(
                         parameter = Parameter(
                             name = "id",
                             value = id,
-                            type = ParameterType.PARAMETER_TYPE_PATH
-                        )
-                    )
+                            type = ParameterType.PARAMETER_TYPE_PATH,
+                        ),
+                    ),
                 )
             }
 
@@ -162,9 +162,9 @@ class AccountService(
                     parameter = Parameter(
                         name = "id",
                         value = id,
-                        type = ParameterType.PARAMETER_TYPE_PATH
-                    )
-                )
+                        type = ParameterType.PARAMETER_TYPE_PATH,
+                    ),
+                ),
             )
         }
         return account
@@ -196,7 +196,7 @@ class AccountService(
         category = account.category?.let { categoryService.toCategory(it, language) },
         city = account.city?.let { placeService.toPlace(it, language) },
         businessId = account.businessId,
-        storeId = account.storeId
+        storeId = account.storeId,
     )
 
     fun toAccountSummary(account: AccountEntity, language: String?) = AccountSummary(
@@ -212,7 +212,7 @@ class AccountService(
         categoryId = account.category?.id,
         cityId = account.city?.id,
         businessId = account.businessId,
-        storeId = account.storeId
+        storeId = account.storeId,
     )
 
     fun search(request: SearchAccountRequest): List<AccountEntity> {
@@ -310,9 +310,9 @@ class AccountService(
                     parameter = Parameter(
                         name = "phoneNumber",
                         type = ParameterType.PARAMETER_TYPE_PAYLOAD,
-                        value = phone.number
-                    )
-                )
+                        value = phone.number,
+                    ),
+                ),
             )
         }
     }

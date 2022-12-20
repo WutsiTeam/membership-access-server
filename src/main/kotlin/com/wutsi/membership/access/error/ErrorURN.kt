@@ -12,5 +12,5 @@ enum class ErrorURN(val urn: String) {
 
     PHONE_NUMBER_ALREADY_ASSIGNED("urn:wutsi:error:membership-access:phone-number-already-assigned"),
 
-    PLACE_NOT_FOUND("urn:wutsi:error:membership-access:place-not-found")
+    PLACE_NOT_FOUND("urn:wutsi:error:membership-access:place-not-found"),
 }

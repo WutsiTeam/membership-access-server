@@ -43,7 +43,7 @@ class CreateAccountControllerTest {
             country = "CM",
             displayName = "Ray Sponsible",
             pictureUrl = "https://www.google.ca/img/1.ong",
-            cityId = 100L
+            cityId = 100L,
         )
         val response = rest.postForEntity(url(), request, CreateAccountResponse::class.java)
 
@@ -77,7 +77,7 @@ class CreateAccountControllerTest {
             country = "CM",
             displayName = "Ray Sponsible",
             pictureUrl = "https://www.google.ca/img/1.ong",
-            cityId = null
+            cityId = null,
         )
         val response = rest.postForEntity(url(), request, CreateAccountResponse::class.java)
 
@@ -98,7 +98,7 @@ class CreateAccountControllerTest {
             country = "CM",
             displayName = "James Bond",
             pictureUrl = "https://www.google.ca/img/1.ong",
-            cityId = 100L
+            cityId = 100L,
         )
         val response = rest.postForEntity(url(), request, CreateAccountResponse::class.java)
 
@@ -128,7 +128,7 @@ class CreateAccountControllerTest {
             country = "CM",
             displayName = "Omer Simpson",
             pictureUrl = "https://www.google.ca/img/1.ong",
-            cityId = 100L
+            cityId = 100L,
         )
         val response = rest.postForEntity(url(), request, CreateAccountResponse::class.java)
 
@@ -158,7 +158,7 @@ class CreateAccountControllerTest {
             country = "CM",
             displayName = "X Y",
             pictureUrl = "https://www.google.ca/img/1.ong",
-            cityId = 100L
+            cityId = 100L,
         )
         val ex = assertThrows<HttpClientErrorException> {
             rest.postForEntity(url(), request, CreateAccountResponse::class.java)

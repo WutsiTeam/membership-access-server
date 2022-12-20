@@ -32,5 +32,5 @@ public data class Account(
     public val twitterId: String? = null,
     public val youtubeId: String? = null,
     public val storeId: Long? = null,
-    public val businessId: Long? = null
+    public val businessId: Long? = null,
 )

@@ -31,7 +31,7 @@ class SearchAccountControllerTest {
     @Test
     fun `search by phone`() {
         val request = SearchAccountRequest(
-            phoneNumber = "+237221234100"
+            phoneNumber = "+237221234100",
         )
         val response = rest.postForEntity(url, request, SearchAccountResponse::class.java)
 
@@ -53,7 +53,7 @@ class SearchAccountControllerTest {
     @Test
     fun `search by phone to normalize`() {
         val request = SearchAccountRequest(
-            phoneNumber = " 237221234100"
+            phoneNumber = " 237221234100",
         )
         val response = rest.postForEntity(url, request, SearchAccountResponse::class.java)
 
@@ -76,7 +76,7 @@ class SearchAccountControllerTest {
     fun `search by phone and status`() {
         val request = SearchAccountRequest(
             phoneNumber = "+237221234113",
-            status = AccountStatus.INACTIVE.name
+            status = AccountStatus.INACTIVE.name,
         )
         val response = rest.postForEntity(url, request, SearchAccountResponse::class.java)
 
@@ -92,7 +92,7 @@ class SearchAccountControllerTest {
     @Test
     fun `search by IDs`() {
         val request = SearchAccountRequest(
-            accountIds = listOf(100L, 101L)
+            accountIds = listOf(100L, 101L),
         )
         val response = rest.postForEntity(url, request, SearchAccountResponse::class.java)
 
@@ -107,7 +107,7 @@ class SearchAccountControllerTest {
     @Test
     fun `stores`() {
         val request = SearchAccountRequest(
-            store = true
+            store = true,
         )
         val response = rest.postForEntity(url, request, SearchAccountResponse::class.java)
 
@@ -122,7 +122,7 @@ class SearchAccountControllerTest {
     @Test
     fun `non-stores`() {
         val request = SearchAccountRequest(
-            store = false
+            store = false,
         )
         val response = rest.postForEntity(url, request, SearchAccountResponse::class.java)
 

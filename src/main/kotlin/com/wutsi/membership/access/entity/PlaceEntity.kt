@@ -19,5 +19,5 @@ data class PlaceEntity(
     var timezoneId: String? = null,
     var type: PlaceType = PlaceType.UNKNOWN,
     val created: Date = Date(),
-    val updated: Date = Date()
+    val updated: Date = Date(),
 )

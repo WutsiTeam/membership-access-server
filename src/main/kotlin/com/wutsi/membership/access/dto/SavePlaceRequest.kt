@@ -17,5 +17,5 @@ public data class SavePlaceRequest(
     public val type: String = "",
     public val longitude: Double? = null,
     public val latitude: Double? = null,
-    public val timezoneId: String? = null
+    public val timezoneId: String? = null,
 )

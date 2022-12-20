@@ -30,7 +30,7 @@ public class SaveAccountDeviceControllerTest {
             type = "Phone",
             model = "Android",
             osName = "Android",
-            osVersion = "1.10.12.10120"
+            osVersion = "1.10.12.10120",
         )
         val response = rest.postForEntity(url(100), request, Any::class.java)
 
@@ -53,7 +53,7 @@ public class SaveAccountDeviceControllerTest {
             type = "Phone",
             model = "Android",
             osName = "Android",
-            osVersion = "1.10.12.10120"
+            osVersion = "1.10.12.10120",
         )
         val response = rest.postForEntity(url(200), request, Any::class.java)
 

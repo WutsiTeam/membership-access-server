@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service
 @Service
 class UpdateAccountAttributeDelegate(
     private val service: AccountService,
-    private val logger: KVLogger
+    private val logger: KVLogger,
 ) {
     fun invoke(id: Long, request: UpdateAccountAttributeRequest) {
         logger.add("request_value", request.value)

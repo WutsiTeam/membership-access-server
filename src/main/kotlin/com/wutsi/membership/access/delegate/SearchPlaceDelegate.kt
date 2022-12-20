@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest
 class SearchPlaceDelegate(
     private val service: PlaceService,
     private val httpRequest: HttpServletRequest,
-    private val logger: KVLogger
+    private val logger: KVLogger,
 ) {
     fun invoke(request: SearchPlaceRequest): SearchPlaceResponse {
         logger.add("request_country", request.country)
@@ -27,7 +27,7 @@ class SearchPlaceDelegate(
         return SearchPlaceResponse(
             places = places.map {
                 service.toPlaceSummary(it, language)
-            }
+            },
         )
     }
 }

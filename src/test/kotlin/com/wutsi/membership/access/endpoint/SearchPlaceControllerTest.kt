@@ -20,7 +20,7 @@ class SearchPlaceControllerTest : AbstractLanguageAwareControllerTest() {
     fun byCountry() {
         // WHEN
         val request = SearchPlaceRequest(
-            country = "CM"
+            country = "CM",
         )
         val response = rest.postForEntity(url(), request, SearchPlaceResponse::class.java)
 
@@ -36,7 +36,7 @@ class SearchPlaceControllerTest : AbstractLanguageAwareControllerTest() {
         // WHEN
         val request = SearchPlaceRequest(
             type = PlaceType.CITY.name,
-            country = "CM"
+            country = "CM",
         )
         val response = rest.postForEntity(url(), request, SearchPlaceResponse::class.java)
 
@@ -58,7 +58,7 @@ class SearchPlaceControllerTest : AbstractLanguageAwareControllerTest() {
         // WHEN
         val request = SearchPlaceRequest(
             country = "CM",
-            keyword = "li"
+            keyword = "li",
         )
         val response = rest.postForEntity(url(), request, SearchPlaceResponse::class.java)
 

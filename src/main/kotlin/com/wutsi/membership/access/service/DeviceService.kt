@@ -24,9 +24,9 @@ class DeviceService(private val dao: DeviceRepository) {
                         parameter = Parameter(
                             name = "id",
                             value = id,
-                            type = ParameterType.PARAMETER_TYPE_PATH
-                        )
-                    )
+                            type = ParameterType.PARAMETER_TYPE_PATH,
+                        ),
+                    ),
                 )
             }
 
@@ -50,6 +50,6 @@ class DeviceService(private val dao: DeviceRepository) {
         type = device.type,
         model = device.model,
         created = device.created.toInstant().atOffset(ZoneOffset.UTC),
-        updated = device.updated.toInstant().atOffset(ZoneOffset.UTC)
+        updated = device.updated.toInstant().atOffset(ZoneOffset.UTC),
     )
 }

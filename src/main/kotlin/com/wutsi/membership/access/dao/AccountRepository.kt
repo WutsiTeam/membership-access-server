@@ -11,6 +11,6 @@ import java.util.Optional
 interface AccountRepository : CrudRepository<AccountEntity, Long> {
     fun findByPhoneAndStatus(
         phone: PhoneEntity,
-        status: AccountStatus
+        status: AccountStatus,
     ): Optional<AccountEntity>
 }

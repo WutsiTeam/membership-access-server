@@ -9,7 +9,7 @@ import kotlin.Long
 
 @RestController
 public class GetPlaceController(
-    public val `delegate`: GetPlaceDelegate
+    public val `delegate`: GetPlaceDelegate,
 ) {
     @GetMapping("/v1/places/{id}")
     public fun invoke(@PathVariable(name = "id") id: Long): GetPlaceResponse = delegate.invoke(id)
