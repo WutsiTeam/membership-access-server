@@ -133,8 +133,6 @@ class AccountService(
     private fun disableBusiness(account: AccountEntity): AccountEntity {
         if (account.business) {
             account.business = false
-            account.businessId = null
-            account.storeId = null
             dao.save(account)
         }
         return account
