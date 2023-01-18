@@ -33,6 +33,7 @@ class EnableBusinessControllerTest {
             whatsapp = true,
             street = "3030 linton",
             country = "GB",
+            email = "ray.sponsible@gmail.com",
         )
         rest.postForEntity(url(100), request, Any::class.java)
 
@@ -46,6 +47,7 @@ class EnableBusinessControllerTest {
         assertEquals(request.whatsapp, account.whatsapp)
         assertEquals(request.country, account.country)
         assertEquals(request.street, account.street)
+        assertEquals(request.email, account.email)
     }
 
     private fun url(id: Long) = "http://localhost:$port/v1/accounts/$id/business"

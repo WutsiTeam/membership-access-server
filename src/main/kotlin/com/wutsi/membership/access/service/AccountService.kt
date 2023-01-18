@@ -120,6 +120,7 @@ class AccountService(
         account.country = request.country
         account.street = request.street
         account.biography = request.biography
+        account.email = request.email
         dao.save(account)
 
         return account

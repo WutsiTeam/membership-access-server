@@ -19,5 +19,7 @@ public data class EnableBusinessRequest(
     public val cityId: Long = 0,
     public val street: String? = null,
     public val biography: String? = null,
+    @get:NotBlank
+    public val email: String = "",
     public val whatsapp: Boolean = false,
 )
