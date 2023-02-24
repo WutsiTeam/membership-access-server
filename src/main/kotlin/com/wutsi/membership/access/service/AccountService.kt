@@ -36,7 +36,6 @@ class AccountService(
 ) {
     companion object {
         const val DEFAULT_LANGUAGE = "en"
-        const val DEFAULT_COUNTRY = "US"
     }
 
     fun create(request: CreateAccountRequest): AccountEntity {
@@ -260,6 +259,7 @@ class AccountService(
         cityId = account.city?.id,
         businessId = account.businessId,
         storeId = account.storeId,
+        name = account.name?.value,
     )
 
     fun search(request: SearchAccountRequest): List<AccountEntity> {

@@ -8,6 +8,7 @@ import kotlin.String
 
 public data class AccountSummary(
     public val id: Long = 0,
+    public val name: String? = null,
     public val pictureUrl: String? = null,
     public val status: String = "",
     public val displayName: String = "",

@@ -46,6 +46,7 @@ class SearchAccountControllerTest {
         assertEquals("https://me.com/12343/picture.png", account.pictureUrl)
         assertEquals("ACTIVE", account.status)
         assertEquals("fr", account.language)
+        assertEquals("ray.sponsible", account.name)
         assertNotNull(account.created)
         assertTrue(account.superUser)
     }
@@ -68,6 +69,7 @@ class SearchAccountControllerTest {
         assertEquals("https://me.com/12343/picture.png", account.pictureUrl)
         assertEquals("ACTIVE", account.status)
         assertEquals("fr", account.language)
+        assertEquals("ray.sponsible", account.name)
         assertNotNull(account.created)
         assertTrue(account.superUser)
     }
