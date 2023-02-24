@@ -10,6 +10,8 @@ enum class ErrorURN(val urn: String) {
 
     DEVICE_NOT_FOUND("urn:wutsi:error:membership-access:device-not-found"),
 
+    NAME_ALREADY_ASSIGNED("urn:wutsi:error:membership-access:name-already-assigned"),
+
     PHONE_NUMBER_ALREADY_ASSIGNED("urn:wutsi:error:membership-access:phone-number-already-assigned"),
 
     PLACE_NOT_FOUND("urn:wutsi:error:membership-access:place-not-found"),

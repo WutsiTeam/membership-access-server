@@ -32,28 +32,28 @@ class UpdateAccountAttributeControllerTest {
     @Test
     fun `set display-name`() {
         val value = "Omam MBiyick"
-        val account = testAttibute("display-name", value)
+        val account = testAttribute("display-name", value)
         assertEquals(value, account.displayName)
     }
 
     @Test
     fun `set picture-url`() {
         val value = "https://www.i.com/1.png"
-        val account = testAttibute("picture-url", value)
+        val account = testAttribute("picture-url", value)
         assertEquals(value, account.pictureUrl)
     }
 
     @Test
     fun `reset picture-url`() {
         val value = null
-        val account = testAttibute("picture-url", value)
+        val account = testAttribute("picture-url", value)
         assertNull(account.pictureUrl)
     }
 
     @Test
     fun `empty picture-url`() {
         val value = ""
-        val account = testAttibute("picture-url", value)
+        val account = testAttribute("picture-url", value)
         assertNull(account.pictureUrl)
     }
 
@@ -90,117 +90,153 @@ class UpdateAccountAttributeControllerTest {
     @Test
     fun `reset language`() {
         val value = "en"
-        val account = testAttibute("language", value)
+        val account = testAttribute("language", value)
         assertEquals(value, account.language)
     }
 
     @Test
     fun `set website`() {
         val value = "https://www.ff.com"
-        val account = testAttibute("website", value)
+        val account = testAttribute("website", value)
         assertEquals(value, account.website)
     }
 
     @Test
     fun `set biography`() {
         val value = "This is a biography"
-        val account = testAttibute("biography", value)
+        val account = testAttribute("biography", value)
         assertEquals(value, account.biography)
     }
 
     @Test
     fun `set category-id`() {
         val value = "1001"
-        val account = testAttibute("category-id", value)
+        val account = testAttribute("category-id", value)
         assertEquals(value.toLong(), account.category?.id)
     }
 
     @Test
     fun `set whatstapp`() {
         val value = "true"
-        val account = testAttibute("whatsapp", value)
+        val account = testAttribute("whatsapp", value)
         assertEquals(value.toBoolean(), account.whatsapp)
     }
 
     @Test
     fun `set street`() {
         val value = "3030 Linton"
-        val account = testAttibute("street", value)
+        val account = testAttribute("street", value)
         assertEquals(value, account.street)
     }
 
     @Test
     fun `set city-id`() {
         val value = "200"
-        val account = testAttibute("city-id", value)
+        val account = testAttribute("city-id", value)
         assertEquals(value.toLong(), account.city?.id)
     }
 
     @Test
     fun `set timezone-id`() {
         val value = "Africa/Abidjan"
-        val account = testAttibute("timezone-id", value)
+        val account = testAttribute("timezone-id", value)
         assertEquals(value, account.timezoneId)
     }
 
     @Test
     fun `set email`() {
         val value = "ray.sponble0101@gmail.com"
-        val account = testAttibute("email", value)
+        val account = testAttribute("email", value)
         assertEquals(value, account.email)
     }
 
     @Test
     fun `set facebook-id`() {
         val value = "111"
-        val account = testAttibute("facebook-id", value)
+        val account = testAttribute("facebook-id", value)
         assertEquals(value, account.facebookId)
     }
 
     @Test
     fun `set instagram-id`() {
         val value = "111"
-        val account = testAttibute("instagram-id", value)
+        val account = testAttribute("instagram-id", value)
         assertEquals(value, account.instagramId)
     }
 
     @Test
     fun `set twitter-id`() {
         val value = "111"
-        val account = testAttibute("twitter-id", value)
+        val account = testAttribute("twitter-id", value)
         assertEquals(value, account.twitterId)
     }
 
     @Test
     fun `set youtube-id`() {
         val value = "111"
-        val account = testAttibute("youtube-id", value)
+        val account = testAttribute("youtube-id", value)
         assertEquals(value, account.youtubeId)
     }
 
     @Test
     fun `set store-id`() {
         val value = "111"
-        val account = testAttibute("store-id", value)
+        val account = testAttribute("store-id", value)
         assertEquals(value.toLong(), account.storeId)
     }
 
     @Test
     fun `set business-id`() {
         val value = "111"
-        val account = testAttibute("business-id", value)
+        val account = testAttribute("business-id", value)
         assertEquals(value.toLong(), account.businessId)
     }
 
-    private fun testAttibute(name: String, value: String?): AccountEntity {
+    @Test
+    fun `set name`() {
+        val value = "Ray-Sponsible"
+        val account = testAttribute("name", value)
+        assertEquals(value.lowercase(), account.name?.value)
+    }
+
+    @Test
+    fun `update name`() {
+        val value = "xxx-yyyy"
+        val account = testAttribute("name", value, 200)
+        assertEquals(value.lowercase(), account.name?.value)
+    }
+
+    @Test
+    fun `clear name`() {
+        val value = ""
+        val account = testAttribute("name", value, 202)
+        assertNull(account.name)
+    }
+
+    @Test
+    fun `duplicate name`() {
+        val request = UpdateAccountAttributeRequest(
+            name = "name",
+            value = "DUPLICATE-name",
+        )
+        val ex = assertThrows<HttpStatusCodeException> {
+            rest.postForEntity(url(200), request, Any::class.java)
+        }
+        assertEquals(HttpStatus.CONFLICT, ex.statusCode)
+
+        val response = ObjectMapper().readValue(ex.responseBodyAsString, ErrorResponse::class.java)
+        assertEquals(ErrorURN.NAME_ALREADY_ASSIGNED.urn, response.error.code)
+    }
+
+    private fun testAttribute(name: String, value: String?, id: Long = 100): AccountEntity {
         val request = UpdateAccountAttributeRequest(
             name = name,
             value = value,
         )
-        val response = rest.postForEntity(url(100), request, Any::class.java)
+        val response = rest.postForEntity(url(id), request, Any::class.java)
         assertEquals(200, response.statusCodeValue)
 
-        return dao.findById(100).get()
+        return dao.findById(id).get()
     }
 
     private fun url(id: Long) = "http://localhost:$port/v1/accounts/$id/attributes"

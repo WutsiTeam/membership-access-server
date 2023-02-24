@@ -1,10 +1,14 @@
 package com.wutsi.membership.access.dto
 
-import org.springframework.format.annotation.DateTimeFormat
+import org.springframework.format.`annotation`.DateTimeFormat
 import java.time.OffsetDateTime
+import kotlin.Boolean
+import kotlin.Long
+import kotlin.String
 
 public data class Account(
     public val id: Long = 0,
+    public val name: String? = null,
     public val email: String? = null,
     public val phone: Phone = Phone(),
     public val city: Place? = null,

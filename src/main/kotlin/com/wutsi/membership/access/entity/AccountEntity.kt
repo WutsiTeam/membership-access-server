@@ -30,6 +30,10 @@ data class AccountEntity(
     @JoinColumn(name = "category_fk")
     var category: CategoryEntity? = null,
 
+    @OneToOne
+    @JoinColumn(name = "name_fk")
+    var name: NameEntity? = null,
+
     @Enumerated
     var status: AccountStatus = AccountStatus.UNKNOWN,
 

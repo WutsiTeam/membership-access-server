@@ -30,6 +30,7 @@ class AccountService(
     private val placeService: PlaceService,
     private val phoneService: PhoneService,
     private val categoryService: CategoryService,
+    private val nameService: NameService,
     private val em: EntityManager,
 ) {
     companion object {
@@ -84,6 +85,15 @@ class AccountService(
             "youtube-id" -> account.youtubeId = toString(request.value)
             "business-id" -> account.businessId = toLong(request.value)
             "store-id" -> account.storeId = toLong(request.value)
+            "name" -> {
+                val value = toString(request.value)
+                if (value == null) {
+                    nameService.delete(account)
+                    account.name = null
+                } else {
+                    nameService.save(value, account)
+                }
+            }
             else -> throw BadRequestException(
                 error = Error(
                     code = ErrorURN.ATTRIBUTE_NOT_VALID.urn,
@@ -135,6 +145,37 @@ class AccountService(
         if (account.business) {
             account.business = false
             dao.save(account)
+        }
+        return account
+    }
+
+    fun findByName(name: String, acceptSuspended: Boolean = false): AccountEntity {
+        val name = nameService.findByName(name)
+        val account = dao.findByName(name)
+            .orElseThrow {
+                NotFoundException(
+                    error = Error(
+                        code = ErrorURN.ACCOUNT_NOT_FOUND.urn,
+                        parameter = Parameter(
+                            name = "name",
+                            value = name,
+                            type = ParameterType.PARAMETER_TYPE_PATH,
+                        ),
+                    ),
+                )
+            }
+
+        if (account.status == AccountStatus.INACTIVE && !acceptSuspended) {
+            throw NotFoundException(
+                error = Error(
+                    code = ErrorURN.ACCOUNT_SUSPENDED.urn,
+                    parameter = Parameter(
+                        name = "name",
+                        value = name,
+                        type = ParameterType.PARAMETER_TYPE_PATH,
+                    ),
+                ),
+            )
         }
         return account
     }
@@ -196,6 +237,7 @@ class AccountService(
         city = account.city?.let { placeService.toPlace(it, language) },
         businessId = account.businessId,
         storeId = account.storeId,
+        name = account.name?.value,
     )
 
     fun toAccountSummary(account: AccountEntity, language: String?) = AccountSummary(
