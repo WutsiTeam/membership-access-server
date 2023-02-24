@@ -14,8 +14,12 @@ INSERT INTO T_PHONE(id, number, country)
         (199, '+237221234199', 'CM')
 ;
 
-INSERT INTO T_ACCOUNT(id, phone_fk, category_fk, city_fk, display_name, picture_url, status, language, super_user, business, store_id, business_id, email, deactivated, country)
+INSERT INTO T_NAME(id, value)
     VALUES
-        (100, 100, 1000, 100, 'Ray Sponsible', 'https://me.com/12343/picture.png', 1, 'fr', true, true, 1001, 1002, 'ray.sponsible@gmail.com', null, 'GB'),
-        (199, 199, null, 100, 'Deleted', null, 2, 'en', false, false, null, null, null, now(), 'CM')
+        (100, 'ray.sponsible');
+
+INSERT INTO T_ACCOUNT(id, phone_fk, category_fk, city_fk, name_fk, display_name, picture_url, status, language, super_user, business, store_id, business_id, email, deactivated, country)
+    VALUES
+        (100, 100, 1000, 100, 100, 'Ray Sponsible', 'https://me.com/12343/picture.png', 1, 'fr', true, true, 1001, 1002, 'ray.sponsible@gmail.com', null, 'GB'),
+        (199, 199, null, 100, null, 'Deleted', null, 2, 'en', false, false, null, null, null, now(), 'CM')
     ;

@@ -88,10 +88,9 @@ class AccountService(
             "name" -> {
                 val value = toString(request.value)
                 if (value == null) {
-                    nameService.delete(account)
-                    account.name = null
+                    deleteName(account)
                 } else {
-                    nameService.save(value, account)
+                    account.name = nameService.save(value, account)
                 }
             }
             else -> throw BadRequestException(
@@ -132,6 +131,11 @@ class AccountService(
         account.biography = request.biography
         account.email = request.email
         dao.save(account)
+
+        if (request.name != null) {
+            account.name = nameService.save(request.name, account)
+            dao.save(account)
+        }
 
         return account
     }
@@ -329,6 +333,14 @@ class AccountService(
         account.status = AccountStatus.INACTIVE
         account.deactivated = Date()
         disableBusiness(account)
+        deleteName(account)
+    }
+
+    private fun deleteName(account: AccountEntity) {
+        account.name?.let {
+            nameService.delete(it)
+            account.name = null
+        }
     }
 
     private fun normalizePhoneNumber(phoneNumber: String?): String? {

@@ -2,6 +2,7 @@ package com.wutsi.membership.access.endpoint
 
 import com.wutsi.enums.AccountStatus
 import com.wutsi.membership.access.dao.AccountRepository
+import com.wutsi.membership.access.dao.NameRepository
 import com.wutsi.membership.access.dto.UpdateAccountStatusRequest
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -12,6 +13,7 @@ import org.springframework.web.client.RestTemplate
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
+import kotlin.test.assertTrue
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Sql(value = ["/db/clean.sql", "/db/UpdateAccountStatusController.sql"])
@@ -23,6 +25,9 @@ class UpdateAccountStatusControllerTest {
 
     @Autowired
     private lateinit var dao: AccountRepository
+
+    @Autowired
+    private lateinit var nameDao: NameRepository
 
     @Test
     fun activate() {
@@ -50,9 +55,10 @@ class UpdateAccountStatusControllerTest {
         val account = dao.findById(100).get()
         assertEquals(AccountStatus.INACTIVE, account.status)
         assertNotNull(account.deactivated)
-        account.business = false
-        account.businessId = null
-        account.storeId = null
+        assertNull(account.name)
+
+        val name = nameDao.findById(100)
+        assertTrue(name.isEmpty)
     }
 
     private fun url(id: Long) = "http://localhost:$port/v1/accounts/$id/status"

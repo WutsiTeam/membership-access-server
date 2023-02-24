@@ -31,13 +31,13 @@ class NameService(private val dao: NameRepository) {
             }
 
     @Transactional
-    fun save(value: String, account: AccountEntity) {
+    fun save(value: String, account: AccountEntity): NameEntity {
         val xvalue = value.lowercase().trim()
         val name = dao.findByValue(xvalue)
         if (account.name != null) {
             // Same value?
             if (account.name?.value == xvalue) {
-                return
+                return account.name!!
             }
 
             // Name already assigned?
@@ -48,6 +48,8 @@ class NameService(private val dao: NameRepository) {
             // Update the name
             account.name!!.value = xvalue
             account.name!!.updated = Date()
+            dao.save(account.name)
+            return account.name!!
         } else {
             // Already assigned?
             if (name.isPresent) {
@@ -55,7 +57,7 @@ class NameService(private val dao: NameRepository) {
             }
 
             // Set name
-            account.name = dao.save(
+            return dao.save(
                 NameEntity(
                     value = xvalue,
                 ),
@@ -64,10 +66,8 @@ class NameService(private val dao: NameRepository) {
     }
 
     @Transactional
-    fun delete(account: AccountEntity) {
-        account.name?.let {
-            dao.delete(it)
-        }
+    fun delete(name: NameEntity) {
+        dao.delete(name)
     }
 
     private fun alreadyAssignedException(value: String) = ConflictException(

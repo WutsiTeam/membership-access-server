@@ -118,7 +118,6 @@ class GetAccountControllerTest {
         assertNotNull(account.deactivated)
     }
 
-
     @Test
     fun notFound() {
         val ex = assertThrows<HttpClientErrorException> {
