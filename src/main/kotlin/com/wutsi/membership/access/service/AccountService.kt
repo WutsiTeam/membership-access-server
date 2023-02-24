@@ -12,6 +12,7 @@ import com.wutsi.membership.access.dto.UpdateAccountStatusRequest
 import com.wutsi.membership.access.entity.AccountEntity
 import com.wutsi.membership.access.entity.PhoneEntity
 import com.wutsi.membership.access.error.ErrorURN
+import com.wutsi.membership.access.util.AccountHandleUtil
 import com.wutsi.platform.core.error.Error
 import com.wutsi.platform.core.error.Parameter
 import com.wutsi.platform.core.error.ParameterType
@@ -132,12 +133,13 @@ class AccountService(
         account.email = request.email
         dao.save(account)
 
-        if (request.name != null) {
-            account.name = nameService.save(request.name, account)
-            dao.save(account)
-        }
+        return assignHandle(account)
+    }
 
-        return account
+    private fun assignHandle(account: AccountEntity): AccountEntity {
+        val handle = AccountHandleUtil.generate(account.displayName, NameService.MAX_LENGTH)
+        account.name = nameService.save(handle, account, false)
+        return dao.save(account)
     }
 
     fun disableBusiness(id: Long): AccountEntity {

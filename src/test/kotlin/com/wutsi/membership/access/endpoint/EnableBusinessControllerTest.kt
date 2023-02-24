@@ -54,27 +54,29 @@ class EnableBusinessControllerTest {
         assertEquals(request.country, account.country)
         assertEquals(request.street, account.street)
         assertEquals(request.email, account.email)
-        assertNull(account.name)
+        assertNotNull(account.name)
+
+        val name = nameDao.findById(account.name!!.id).get()
+        assertEquals("yo-inc", name.value)
     }
 
     @Test
-    fun enableWithName() {
+    fun duplicateName() {
         // WHEN
         val request = EnableBusinessRequest(
-            displayName = "Yo Inc",
+            displayName = "Yo Man",
             categoryId = 1001L,
             cityId = 200,
             biography = "This is the biography",
             whatsapp = true,
             street = "3030 linton",
             country = "GB",
-            email = "ray.sponsible@hotmail.com",
-            name = "101",
+            email = "yo.man@gmail.com",
         )
-        rest.postForEntity(url(101), request, Any::class.java)
+        rest.postForEntity(url(102), request, Any::class.java)
 
         // THEN
-        val account = dao.findById(101).get()
+        val account = dao.findById(102).get()
         assertTrue(account.business)
         assertEquals(request.displayName, account.displayName)
         assertEquals(request.categoryId, account.category?.id)
@@ -84,10 +86,7 @@ class EnableBusinessControllerTest {
         assertEquals(request.country, account.country)
         assertEquals(request.street, account.street)
         assertEquals(request.email, account.email)
-        assertNotNull(account.name)
-
-        val name = nameDao.findById(account.name!!.id).get()
-        assertEquals(request.name, name.value)
+        assertNull(account.name)
     }
 
     private fun url(id: Long) = "http://localhost:$port/v1/accounts/$id/business"

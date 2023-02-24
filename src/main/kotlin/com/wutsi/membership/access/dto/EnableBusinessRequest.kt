@@ -22,5 +22,4 @@ public data class EnableBusinessRequest(
     @get:NotBlank
     public val email: String = "",
     public val whatsapp: Boolean = false,
-    public val name: String? = null,
 )

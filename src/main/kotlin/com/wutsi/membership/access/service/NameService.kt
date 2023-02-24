@@ -4,6 +4,7 @@ import com.wutsi.membership.access.dao.NameRepository
 import com.wutsi.membership.access.entity.AccountEntity
 import com.wutsi.membership.access.entity.NameEntity
 import com.wutsi.membership.access.error.ErrorURN
+import com.wutsi.membership.access.util.AccountHandleUtil
 import com.wutsi.platform.core.error.Error
 import com.wutsi.platform.core.error.Parameter
 import com.wutsi.platform.core.error.ParameterType
@@ -15,6 +16,10 @@ import javax.transaction.Transactional
 
 @Service
 class NameService(private val dao: NameRepository) {
+    companion object {
+        const val MAX_LENGTH = 30
+    }
+
     fun findByName(name: String): NameEntity =
         dao.findByValue(name.lowercase())
             .orElseThrow {
@@ -31,8 +36,8 @@ class NameService(private val dao: NameRepository) {
             }
 
     @Transactional
-    fun save(value: String, account: AccountEntity): NameEntity {
-        val xvalue = value.lowercase().trim()
+    fun save(value: String, account: AccountEntity, throwExceptionOnError: Boolean = true): NameEntity? {
+        val xvalue = AccountHandleUtil.generate(value, MAX_LENGTH)
         val name = dao.findByValue(xvalue)
         if (account.name != null) {
             // Same value?
@@ -42,7 +47,11 @@ class NameService(private val dao: NameRepository) {
 
             // Name already assigned?
             if (name.isPresent) {
-                throw alreadyAssignedException(xvalue)
+                if (throwExceptionOnError) {
+                    throw alreadyAssignedException(xvalue)
+                } else {
+                    return null
+                }
             }
 
             // Update the name
@@ -53,7 +62,11 @@ class NameService(private val dao: NameRepository) {
         } else {
             // Already assigned?
             if (name.isPresent) {
-                throw alreadyAssignedException(value)
+                if (throwExceptionOnError) {
+                    throw alreadyAssignedException(xvalue)
+                } else {
+                    return null
+                }
             }
 
             // Set name
