@@ -196,14 +196,14 @@ class UpdateAccountAttributeControllerTest {
     fun `set name`() {
         val value = "Ray-Sponsible"
         val account = testAttribute("name", value)
-        assertEquals(value.lowercase(), account.name?.value)
+        assertEquals("raysponsible", account.name?.value)
     }
 
     @Test
     fun `update name`() {
         val value = "xxx-yyyy"
         val account = testAttribute("name", value, 200)
-        assertEquals(value.lowercase(), account.name?.value)
+        assertEquals("xxxyyyy", account.name?.value)
     }
 
     @Test

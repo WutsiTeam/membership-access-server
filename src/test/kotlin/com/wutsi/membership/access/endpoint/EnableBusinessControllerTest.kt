@@ -57,7 +57,7 @@ class EnableBusinessControllerTest {
         assertNotNull(account.name)
 
         val name = nameDao.findById(account.name!!.id).get()
-        assertEquals("yo-inc", name.value)
+        assertEquals("yoinc", name.value)
     }
 
     @Test

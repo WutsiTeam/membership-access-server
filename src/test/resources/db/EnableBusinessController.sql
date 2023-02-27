@@ -16,7 +16,7 @@ INSERT INTO T_PHONE(id, number, country)
 
 INSERT INTO T_NAME(id, value)
     VALUES
-        (101, 'yo-man')
+        (101, 'yoman')
 ;
 
 INSERT INTO T_ACCOUNT(id, phone_fk, city_fk, name_fk, business, display_name, picture_url, status, country, language)

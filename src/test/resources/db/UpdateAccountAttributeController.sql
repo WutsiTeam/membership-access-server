@@ -20,7 +20,7 @@ INSERT INTO T_PHONE(id, number, country)
 INSERT INTO T_NAME(id, value)
     VALUES
         (200, 'yo-man'),
-        (201, 'duplicate-name'),
+        (201, 'duplicatename'),
         (202, 'clear-me')
 ;
 
