@@ -114,6 +114,7 @@ class PlaceService(
     fun import(country: String) {
         var row = 0
         var imported = 0
+        var errors = 0
         val url = URL("https://download.geonames.org/export/dump/${country.uppercase()}.zip")
         val file = download(country.uppercase(), url)
         try {
@@ -132,16 +133,18 @@ class PlaceService(
                         doSave(record)
                         imported++
                     } catch (ex: Exception) {
+                        errors++
                         logger.setException(ex)
                     } finally {
                         logger.log()
+                        row++
                     }
                 }
-                row++
             }
         } finally {
-            logger.add("rows", row)
-            logger.add("imported", imported)
+            logger.add("csv_rows", row)
+            logger.add("csv_imported", imported)
+            logger.add("csv_errors", errors)
             logger.add("file", file)
             logger.add("url", url)
         }

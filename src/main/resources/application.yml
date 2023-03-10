@@ -62,6 +62,9 @@ wutsi:
   client-id: membership-access
   application:
     name: membership-access
+    services:
+      category:
+        url: https://int-wutsi.s3.amazonaws.com/static/membership-access-server/csv/business-categories.csv
   platform:
     cache:
       name: ${wutsi.application.name}

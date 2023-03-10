@@ -12,6 +12,11 @@ import com.wutsi.platform.core.error.Error
 import com.wutsi.platform.core.error.Parameter
 import com.wutsi.platform.core.error.ParameterType
 import com.wutsi.platform.core.error.exception.NotFoundException
+import com.wutsi.platform.core.logging.DefaultKVLogger
+import com.wutsi.platform.core.logging.KVLogger
+import org.apache.commons.csv.CSVFormat
+import org.apache.commons.csv.CSVParser
+import org.apache.commons.csv.CSVRecord
 import org.springframework.stereotype.Service
 import javax.persistence.EntityManager
 import javax.persistence.Query
@@ -20,6 +25,7 @@ import javax.persistence.Query
 class CategoryService(
     private val dao: CategoryRepository,
     private val em: EntityManager,
+    private val logger: KVLogger,
 ) {
     fun findById(id: Long): CategoryEntity =
         dao.findById(id).orElseThrow {
@@ -72,6 +78,62 @@ class CategoryService(
             .setFirstResult(request.offset)
             .setMaxResults(request.limit)
             .resultList as List<CategoryEntity>
+    }
+
+    fun import(language: String) {
+        var row = 1
+        var imported = 0
+        var errors = 0
+        val input = CategoryService::class.java.getResourceAsStream("/data/business-categories.csv")
+        val parser = CSVParser.parse(
+            input,
+            Charsets.UTF_8,
+            CSVFormat.Builder.create()
+                .setSkipHeaderRecord(true)
+                .setDelimiter(",")
+                .setHeader("id", "title", "title_fr")
+                .build(),
+        )
+
+        for (record in parser) {
+            val logger = DefaultKVLogger()
+            log(row, record, logger)
+            try {
+                save(record, language)
+                imported++
+            } catch (ex: Exception) {
+                errors++
+                logger.setException(ex)
+            } finally {
+                logger.log()
+                row++
+            }
+        }
+
+        logger.add("csv_rows", row)
+        logger.add("csv_imported", imported)
+        logger.add("csv_errors", errors)
+    }
+
+    private fun save(record: CSVRecord, language: String?) {
+        save(
+            id = record.get("id").toLong(),
+            request = SaveCategoryRequest(
+                title = if (language == "fr") {
+                    record.get("title_fr")
+                } else {
+                    record.get("title")
+                },
+            ),
+            language = language,
+        )
+    }
+
+    private fun log(row: Int, record: CSVRecord, logger: KVLogger) {
+        logger.add("row", row)
+        logger.add("record_id", record.get("id"))
+        logger.add("record_title", record.get("title"))
+        logger.add("record_title_fr", record.get("title_fr"))
     }
 
     private fun sql(request: SearchCategoryRequest, language: String?): String {
