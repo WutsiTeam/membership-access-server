@@ -334,7 +334,6 @@ class AccountService(
     private fun suspend(account: AccountEntity) {
         account.status = AccountStatus.INACTIVE
         account.deactivated = Date()
-        disableBusiness(account)
         deleteName(account)
     }
 
